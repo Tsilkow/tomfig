@@ -22,11 +22,7 @@
 (defalias
   qwe (layer-switch qwerty)
   pol (one-shot 500 (layer-while-held polish))
-  sym (layer-switch symbols) 
-  oslc (one-shot 500 lctl)
-  osls (one-shot-release 500 lsft)
-  osrs (one-shot-release 500 rsft)
-  osra (one-shot 500 ralt)
+  sym (layer-switch symbols)
 )
 
 (defoverrides
@@ -48,8 +44,8 @@
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  a    s    d    f    g    h    j    k    l    ;    '    ret
- @osls z    x    c    v    b    n    m    ,    .    /   @osrs
-  lalt lmet @oslc           spc          @osra rmet rctl
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lalt lmet lctl           spc            ralt rmet rctl
 )
 
 (deflayer symbols
