@@ -54,13 +54,13 @@ Plug 'preservim/nerdtree'
 "" Map \b to toggle the breakpoint on the current line
 "map \b <Action>(ToggleLineBreakpoint)
 
-inoremap <C-Space> <Esc>
-inoremap jk <Esc>
-inoremap kj <Esc>
+" inoremap <C-Space> <Esc>
+" inoremap jk <Esc>
+" inoremap kj <Esc>
 " inoremap <Esc> :action EditorEscape<CR>
 inoremap <C-Esc> :action EditorEscape<CR>
 nnoremap <Space> <Nop>
-nnoremap <C-Space> i
+" nnoremap <C-Space> i
 nnoremap <CR> i
 let mapleader=" "
 nnoremap <leader><Space> :action GotoAction<CR>
@@ -86,12 +86,12 @@ noremap [ :action PreviousTab<CR>
 noremap ] :action NextTab<CR>
 noremap \ :action NextSplitter<CR>
 
-nnoremap <Tab> ==
-vnoremap <Tab> =
-nnoremap <S-Tab> <<
-vnoremap <S-Tab> <
-nnoremap <leader><Tab> >>
-vnoremap <leader><Tab> >
+nnoremap <Tab> >>gv
+vnoremap <Tab> >gv
+nnoremap <S-Tab> <<gv
+vnoremap <S-Tab> <gv
+nnoremap <leader><Tab> ==gv
+vnoremap <leader><Tab> =gv
 nnoremap a v:action EditorSelectWord<CR>
 nnoremap A v:action EditorUnSelectWord<CR>
 vnoremap a :action EditorSelectWord<CR>
