@@ -39,15 +39,6 @@
   (rsft .) (rsft 0)
   (lsft 0) (lsft .)
   (rsft 0) (rsft .)
-  (lalt a) (ralt a)
-  (lalt c) (ralt c)
-  (lalt e) (ralt e)
-  (lalt l) (ralt l)
-  (lalt n) (ralt n)
-  (lalt o) (ralt o)
-  (lalt s) (ralt s)
-  (lalt x) (ralt x)
-  (lalt z) (ralt z)
 )
 
 (deflayer qwerty
@@ -56,7 +47,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lalt lmet lctl           spc            ralt rmet rctl
+  ralt lalt lctl           spc            ralt rmet rctl
 )
 
 (deflayer symbols
