@@ -86,11 +86,11 @@ noremap [ :action PreviousTab<CR>
 noremap ] :action NextTab<CR>
 noremap \ :action NextSplitter<CR>
 
-nnoremap <Tab> >>gv
+nnoremap <Tab> >>
 vnoremap <Tab> >gv
-nnoremap <S-Tab> <<gv
+nnoremap <S-Tab> <<
 vnoremap <S-Tab> <gv
-nnoremap <leader><Tab> ==gv
+nnoremap <leader><Tab> ==
 vnoremap <leader><Tab> =gv
 nnoremap a v:action EditorSelectWord<CR>
 nnoremap A v:action EditorUnSelectWord<CR>
