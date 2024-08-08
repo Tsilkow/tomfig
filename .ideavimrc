@@ -54,25 +54,19 @@ Plug 'preservim/nerdtree'
 "" Map \b to toggle the breakpoint on the current line
 "map \b <Action>(ToggleLineBreakpoint)
 
-" inoremap <C-Space> <Esc>
-" inoremap jk <Esc>
-" inoremap kj <Esc>
-" inoremap <Esc> :action EditorEscape<CR>
 inoremap <C-Esc> :action EditorEscape<CR>
 nnoremap <Space> <Nop>
-" nnoremap <C-Space> i
 nnoremap <CR> i
 let mapleader=" "
 nnoremap <leader><Space> :action GotoAction<CR>
 
 " nnoremap q q
-nnoremap w :w<CR>
+nnoremape w c
 nnoremap <leader>w :action SaveAs<CR>
-" nnoremap e :action OpenFile<CR>
 nnoremap e :NERDTreeToggle<CR>
 nnoremap r R
 noremap t .
-" inoremap <C-y> <C-o>:action copilot.requestCompletion<CR>
+noremap y <Nop>
 noremap u b
 inoremap <C-u> <C-o>b
 inoremap <C-i> <C-o>w
@@ -96,8 +90,6 @@ nnoremap a v:action EditorSelectWord<CR>
 nnoremap A v:action EditorUnSelectWord<CR>
 vnoremap a :action EditorSelectWord<CR>
 vnoremap A :action EditorUnSelectWord<CR>
-" nnoremap a viw
-" vnoremap a iw
 nnoremap s v
 nnoremap S V
 noremap d "_x
@@ -105,8 +97,8 @@ inoremap <C-d> <C-o>"_x
 noremap D "_X
 inoremap <C-D> <C-o>"_X
 noremap <leader>d "_dd
-noremap f /
-noremap F ?
+" noremap f f
+" noremap F F
 " noremap g g
 inoremap <C-h> <Left>
 noremap <leader>h ^
@@ -139,11 +131,8 @@ noremap b :action Back<CR>
 " noremap n n
 noremap m :action GotoDeclaration<CR>
 noremap <leader>m :action RenameElement<CR>
-noremap , :action ShowHoverInfo<CR>
-noremap . :action ParameterInfo<CR>
-noremap / :action CommentByLineComment<CR>
-noremap ? :action ShowErrorDescription<CR>
-
-" Accept suggestion
-" Prev/Next suggestion
-" Copilot suggestion
+noremap , :action ShowParameterInfo<CR>
+noremap . :action ShowErrorDescription<CR>
+noremap <leader>/ :action CommentByLineComment<CR>
+" noremape / /
+" noremap ? ?
