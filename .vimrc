@@ -1,55 +1,39 @@
 set nocompatible " required for vundle
-filetype off " required for vundle
 
-" set rtp+=~/.vim/bundle/Vundle.vim
-" call vundle#begin()
-" 
-" Plugin 'VundleVim/Vundle.vim'
-" Plugin 'dracula/vim', { 'as': 'dracula' }
-" Plugin 'terryma/vim-expand-region'
-" 
-" call vundle#end()
-" filetype plugin indent on " required for vundle
-
-set scrolloff=1
-
-set ignorecase " case insensitive search
-set smartcase " If there are uppercase letters, become case-sensitive.
-set incsearch " live incremental searching
-" set showmatch " live match highlighting
-" set hlsearch " highlight matches
-set gdefault " use the `g` flag by default.
-
-set virtualedit=onemore " Allow moving one character past the end of the line.
-
-set relativenumber
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set expandtab " use spaces instead of tabs.
-set smarttab " let's tab key insert 'tab stops', and bksp deletes tabs.
-set shiftround " tab / shifting moves to closest tabstop.
 set autoindent " Match indents on new lines.
+set expandtab " use spaces instead of tabs.
+set gdefault " use the `g` flag by default.
+set history=1000
+set hlsearch " highlight search
+set ignorecase " case insensitive search
+set incsearch
+set relativenumber
+set scrolloff=5
+set shiftround " tab / shifting moves to closest tabstop.
+set shiftwidth=4
+set showmatch
+set smartcase
 set smartindent " Intellegently dedent / indent new lines based on rules.
-
-" Use the clipboard to copy and paste between Vim and other programs.
-" set clipboard+=unnamed  " use the clipboards of vim and win
-" set paste               " Paste from a windows or from vim
-" set go+=a
+set smarttab " let's tab key insert 'tab stops', and bksp deletes tabs.
+set softtabstop=4
+set tabstop=4
+set termguicolors
+set virtualedit=onemore " Allow moving one character past the end of the line.
+set wildmode=list:longest,list:full
+set wrap
 
 " Don't use Ex mode, use Q for formatting.
 map Q gq
 
 noremap <Space> <Nop>
-" nnoremap <C-Space> i
 nnoremap <CR> i
 let mapleader=" "
 
 " nnoremap q q
-nnoremap w c
+nnoremap w <C-w><C-w>
 nnoremap e <Nop>
 nnoremap r R
-noremap t .
+noremap t <Nop>
 " inoremap <C-y> <C-o>:action copilot.requestCompletion<CR>
 noremap u b
 inoremap <C-u> <C-o>b
@@ -61,14 +45,16 @@ noremap o %
 noremap O %
 noremap p J
 
+inoremap <Tab> <C-v><Tab>
 nnoremap <Tab> >>
 vnoremap <Tab> >gv
 nnoremap <S-Tab> <<
 vnoremap <S-Tab> <gv
 nnoremap <leader><Tab> ==
 vnoremap <leader><Tab> =gv
-noremap a <Plug>(expand_region_expand)
-noremap A <Plug>(expand_region_shrink)
+" reserved for expand/shrink selection
+noremap a <Nop>
+noremap A <Nop>
 nnoremap s v
 nnoremap S V
 noremap d "_x
@@ -89,8 +75,10 @@ noremap <leader>k {
 inoremap <C-l> <Right>
 noremap K <C-u>
 noremap <leader>l $
-noremap ; ;
-noremap : :
+" noremap ; ;
+" noremap : :
+" reserved for commenting
+noremap ' <Nop>
 nnoremap <leader><CR> o
 " nnoremap <S-CR> O
 
@@ -98,21 +86,24 @@ noremap z u
 noremap Z U
 noremap <leader>z <C-r>
 noremap x d
+noremap X D
 noremap <leader>x "+d
 noremap c y
 noremap <leader>c "+y
 noremap v p
-noremap <leader>v "+p
-cnoremap <c-v> <c-r>0
 noremap V P
+noremap <leader>v "+p
 noremap <leader>V "+P
-noremap b g;
-noremap B g,
+cnoremap <c-v> <c-r>0
+" reserved for buffer actions
+noremap b :b <C-d> 
+noremap B <Nop>
 " noremap n n
-noremap m <Nop>
-noremap <leader>m <Nop>
+noremap m '
+noremap <leader>m m
+" reserved for show parameters
 noremap , <Nop>
-noremap . <Nop>
+" noremap . .
 " noremap / /
 " noremap ? ?
 
@@ -122,12 +113,10 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 
 " keybinding todo:
-" * comments (`leader /` ?)
 "
 " neovim todo:
 " * a -- expand, shrink region
 " * e -- Nerdtree equivalent
-" * m -- jump to definition/usage
-" * <leader>m -- rename
-" * , -- show parameters
-" * . -- show error
+" * , -- show error
+" * airline customization
+
