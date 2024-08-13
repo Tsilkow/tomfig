@@ -57,9 +57,9 @@ noremap a <Nop>
 noremap A <Nop>
 nnoremap s v
 nnoremap S V
-noremap d "_x
+" noremap d d
 inoremap <C-d> <C-o>"_x
-noremap D "_X
+noremap D "_x
 inoremap <C-D> <C-o>"_X
 noremap <leader>d "_dd
 " noremap f f
@@ -111,12 +111,3 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
-
-" keybinding todo:
-"
-" neovim todo:
-" * a -- expand, shrink region
-" * e -- Nerdtree equivalent
-" * , -- show error
-" * airline customization
-
