@@ -32,5 +32,5 @@ neovim_config = Config(
 
 config_sets = {
     'minimal': [vim_config, tmux_config],
-    'full': [vim_config, tmux_config]
+    'full': [vim_config, tmux_config, neovim_config]
 }
