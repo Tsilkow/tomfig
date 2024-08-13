@@ -24,7 +24,7 @@ def move_directory(source_dir, target_dir, dirpath):
     source = osp.join(source_dir, dirpath)
     target = osp.join(target_dir, dirpath)
     try:
-        shutil.copytree(source, target)
+        shutil.copytree(source, target, dirs_exist_ok=True)
     except OSError as error:
         print(f'\nMoving config files `{dirpath}*` from `{source}` to `{target}` failed due to following error: \n{error}\nAborting ...')
         return False
