@@ -68,8 +68,8 @@ def get_commit_message(repo):
         print(f'Your commit message is: {message}. \nDo you want to proceed?')
         while True:
             confirmation = input('(Y/n)> ')
-            if confirmation in 'YyNn'.split(): break
-        if confirmation in 'Yy'.split(): break
+            if confirmation in list('YyNn'): break
+        if confirmation in list('Yy'): break
 
     return message
 
