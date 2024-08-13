@@ -13,9 +13,9 @@ def move_file(source_dir, target_dir, filepath):
     source = osp.join(source_dir, filepath)
     target = osp.join(target_dir, filepath)
     try:
-        shutil.move(source, target)
+        shutil.copyfile(source, target)
     except OSError as error:
-        print(f'Moving config file `{filepath}` from `{source}` to `{target}` failed due to following error: \n{error}\nAborting ...')
+        print(f'\nMoving config file `{filepath}` from `{source}` to `{target}` failed due to following error: \n{error}\nAborting ...')
         return False
     return True
 
@@ -24,22 +24,26 @@ def move_directory(source_dir, target_dir, dirpath):
     source = osp.join(source_dir, dirpath)
     target = osp.join(target_dir, dirpath)
     try:
-        shutil.copytree(source, target)
+        shutil.copytree(source, target, dirs_exist_ok=True)
     except OSError as error:
-        print(f'Moving config files `{dirpath}*` from `{source}` to `{target}` failed due to following error: \n{error}\nAborting ...')
+        print(f'\nMoving config files `{dirpath}*` from `{source}` to `{target}` failed due to following error: \n{error}\nAborting ...')
         return False
     return True
 
 
 def move_thing(source_dir, target_dir, thingpath):
-    if thingpath[-1] == '/' and osp.isdir(thingpath): return move_directory(source_dir, target_dir, thingpath)
-    elif thingpath[-1] != '/' and osp.isfile(thingpath): return move_directory(source_dir, target_dir, thingpath)
+    full_thingpath = osp.join(source_dir, thingpath)
+    if thingpath[-1] == '/' and osp.isdir(full_thingpath): 
+        return move_directory(source_dir, target_dir, thingpath)
+    elif thingpath[-1] != '/' and osp.isfile(full_thingpath): 
+        return move_file(source_dir, target_dir, thingpath)
     else: 
-        print(f'Invalid path: {thingpath}\nAborting ...')
+        print(f'\nInvalid path: {full_thingpath}\nAborting ...')
         return False
 	
 
-def move_configs_from_target(config_dir: str, configs: List[Config]):
+def move_configs_from_target(tomfig_dir: str, configs: List[Config]):
+    config_dir = osp.join(tomfig_dir, 'configs')
     for config in configs:
         for filepath in config.filepaths:
             status = move_thing(config.target_directory, config_dir, filepath)
@@ -47,7 +51,8 @@ def move_configs_from_target(config_dir: str, configs: List[Config]):
     return True
 
 
-def move_configs_to_target(config_dir: str, configs: List[Config]):
+def move_configs_to_target(tomfig_dir: str, configs: List[Config]):
+    config_dir = osp.join(tomfig_dir, 'configs')
     for config in configs:
         for filepath in config.filepaths:
             status = move_thing(config_dir, config.target_directory, filepath)
@@ -65,8 +70,8 @@ def get_commit_message(repo):
         print(f'Your commit message is: {message}. \nDo you want to proceed?')
         while True:
             confirmation = input('(Y/n)> ')
-            if confirmation in 'YyNn'.split(): break
-        if confirmation in 'Yy'.split(): break
+            if confirmation in list('YyNn'): break
+        if confirmation in list('Yy'): break
 
     return message
 
@@ -100,9 +105,9 @@ def pull(config_set: str, tomfig_dir: str, verbose: bool=True):
         origin = repo.remotes.origin
         origin.pull()
 
-    if verbose: print(f'\rPushing configs to local directories ...', end='', flush=True)
+    if verbose: print(f'\rPulling configs to local directories ...', end='', flush=True)
     if not move_configs_to_target(tomfig_dir, configs): return False
-    if verbose: print(f'\rPushing configs to local directories [DONE]', flush=True)
+    if verbose: print(f'\rPulling configs to local directories [DONE]', flush=True)
 
     if verbose: print(f'Config update completed successfully!')
     return True
@@ -129,15 +134,15 @@ def push(config_set: str, tomfig_dir: str, verbose: bool=True):
         origin = repo.remotes.origin
         origin.pull()
 
-    if verbose: print(f'\rPulling configs from local directories ...', end='', flush=True)
+    if verbose: print(f'\rPushing configs from local directories ...', end='', flush=True)
     if not move_configs_from_target(tomfig_dir, configs): return False
-    if verbose: print(f'\rPulling configs from local directories [DONE]', flush=True)
+    if verbose: print(f'\rPushing configs from local directories [DONE]', flush=True)
 
     with git.Repo(tomfig_dir) as repo:
         origin = repo.remotes.origin
         commit_message = get_commit_message(repo)
         repo.git.add(update=True)
-        repo.git.commit(commit_message)
+        repo.index.commit(commit_message)
         origin.push()
 
     if verbose: print(f'Config push completed successfully!')
