@@ -1,5 +1,6 @@
-import os.path as osp
 from typing import List
+import os
+import os.path as osp
 import shutil
 
 import click
@@ -75,9 +76,12 @@ def cli():
     pass
 
 
-@cli.group()
+DEFAULT_TOMFIG_DIR = f'{os.getenv("HOME")}/tomfig/' 
+
+
+@cli.command()
 @click.argument('config_set', type=str)
-@click.option('--tomfig_dir', default='~/tomfig/', show_default=True, type=click.Path(exists=True))
+@click.option('--tomfig_dir', default=DEFAULT_TOMFIG_DIR, show_default=True, type=click.Path(exists=True))
 @click.option('--verbose/--silent', default=True)
 def pull(config_set: str, tomfig_dir: str, verbose: bool=True):
     assert config_set in config_sets.keys()
@@ -88,8 +92,8 @@ def pull(config_set: str, tomfig_dir: str, verbose: bool=True):
         for config in configs:
             print(config)
 
-    with git.repo(tomfig_dir) as repo:
-        if repo.bare():
+    with git.Repo(tomfig_dir) as repo:
+        if repo.bare:
             print(f'No repository found at {tomfig_dir}. Aborting ...')
             return False
     	
@@ -104,9 +108,9 @@ def pull(config_set: str, tomfig_dir: str, verbose: bool=True):
     return True
 
 
-@cli.group()
+@cli.command()
 @click.argument('config_set', type=str)
-@click.option('--tomfig_dir', default='~/tomfig/', show_default=True, type=click.Path(exists=True))
+@click.option('--tomfig_dir', default=DEFAULT_TOMFIG_DIR, show_default=True, type=click.Path(exists=True))
 @click.option('--verbose/--silent', default=True)
 def push(config_set: str, tomfig_dir: str, verbose: bool=True):
     assert config_set in config_sets.keys()
@@ -117,8 +121,8 @@ def push(config_set: str, tomfig_dir: str, verbose: bool=True):
         for config in configs:
             print(config)
 
-    with git.repo(tomfig_dir) as repo:
-        if repo.bare():
+    with git.Repo(tomfig_dir) as repo:
+        if repo.bare:
             print(f'No repository found at {tomfig_dir}. Aborting ...')
             return False
 
@@ -129,7 +133,7 @@ def push(config_set: str, tomfig_dir: str, verbose: bool=True):
     if not move_configs_from_target(tomfig_dir, configs): return False
     if verbose: print(f'\rPulling configs from local directories [DONE]', flush=True)
 
-    with git.repo(tomfig_dir) as repo:
+    with git.Repo(tomfig_dir) as repo:
         origin = repo.remotes.origin
         commit_message = get_commit_message(repo)
         repo.git.add(update=True)

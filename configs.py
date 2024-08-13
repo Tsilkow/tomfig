@@ -30,7 +30,20 @@ neovim_config = Config(
     target_directory='~/.config/nvim/'
 )
 
+test1_config = Config(
+    name='test1',
+    filepaths=['file1'],
+    target_directory='~/tomfig/tests/test1/'
+)
+
+test2_config = Config(
+    name='test2',
+    filepaths=['file2', 'dir1/'],
+    target_directory='~/tomfig/tests/test2/'
+)
+
 config_sets = {
     'minimal': [vim_config, tmux_config],
-    'full': [vim_config, tmux_config, neovim_config]
+    'full': [vim_config, tmux_config, neovim_config],
+    'test': [test1_config, test2_config],
 }
