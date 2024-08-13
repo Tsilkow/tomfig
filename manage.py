@@ -32,12 +32,13 @@ def move_directory(source_dir, target_dir, dirpath):
 
 
 def move_thing(source_dir, target_dir, thingpath):
-    if thingpath[-1] == '/' and osp.isdir(osp.join(source_dir, thingpath)): 
+    full_thingpath = osp.join(source_dir, thingpath)
+    if thingpath[-1] == '/' and osp.isdir(full_thingpath): 
         return move_directory(source_dir, target_dir, thingpath)
-    elif thingpath[-1] != '/' and osp.isfile(osp.join(source_dir, thingpath)): 
+    elif thingpath[-1] != '/' and osp.isfile(full_thingpath): 
         return move_directory(source_dir, target_dir, thingpath)
     else: 
-        print(f'\nInvalid path: {thingpath}\nAborting ...')
+        print(f'\nInvalid path: {full_thingpath}\nAborting ...')
         return False
 	
 
