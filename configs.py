@@ -42,7 +42,7 @@ test1_config = Config(
 test2_config = Config(
     name='test2',
     filepaths=['file2', 'dir1/'],
-    target_directory=f'{"HOME"}/tomfig/tests/test2/'
+    target_directory=f'{HOME}/tomfig/tests/test2/'
 )
 
 config_sets = {
