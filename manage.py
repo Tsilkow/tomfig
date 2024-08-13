@@ -42,7 +42,8 @@ def move_thing(source_dir, target_dir, thingpath):
         return False
 	
 
-def move_configs_from_target(config_dir: str, configs: List[Config]):
+def move_configs_from_target(tomfig_dir: str, configs: List[Config]):
+    config_dir = osp.join(tomfig_dir, 'configs')
     for config in configs:
         for filepath in config.filepaths:
             status = move_thing(config.target_directory, config_dir, filepath)
@@ -50,7 +51,8 @@ def move_configs_from_target(config_dir: str, configs: List[Config]):
     return True
 
 
-def move_configs_to_target(config_dir: str, configs: List[Config]):
+def move_configs_to_target(tomfig_dir: str, configs: List[Config]):
+    config_dir = osp.join(tomfig_dir, 'configs')
     for config in configs:
         for filepath in config.filepaths:
             status = move_thing(config_dir, config.target_directory, filepath)
@@ -103,9 +105,9 @@ def pull(config_set: str, tomfig_dir: str, verbose: bool=True):
         origin = repo.remotes.origin
         origin.pull()
 
-    if verbose: print(f'\rPushing configs to local directories ...', end='', flush=True)
+    if verbose: print(f'\rPulling configs to local directories ...', end='', flush=True)
     if not move_configs_to_target(tomfig_dir, configs): return False
-    if verbose: print(f'\rPushing configs to local directories [DONE]', flush=True)
+    if verbose: print(f'\rPulling configs to local directories [DONE]', flush=True)
 
     if verbose: print(f'Config update completed successfully!')
     return True
@@ -132,9 +134,9 @@ def push(config_set: str, tomfig_dir: str, verbose: bool=True):
         origin = repo.remotes.origin
         origin.pull()
 
-    if verbose: print(f'\rPulling configs from local directories ...', end='', flush=True)
+    if verbose: print(f'\rPushing configs from local directories ...', end='', flush=True)
     if not move_configs_from_target(tomfig_dir, configs): return False
-    if verbose: print(f'\rPulling configs from local directories [DONE]', flush=True)
+    if verbose: print(f'\rPushing configs from local directories [DONE]', flush=True)
 
     with git.Repo(tomfig_dir) as repo:
         origin = repo.remotes.origin
