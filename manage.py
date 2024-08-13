@@ -140,7 +140,7 @@ def push(config_set: str, tomfig_dir: str, verbose: bool=True):
         origin = repo.remotes.origin
         commit_message = get_commit_message(repo)
         repo.git.add(update=True)
-        repo.git.commit(f'"{commit_message}"')
+        repo.index.commit(commit_message)
         origin.push()
 
     if verbose: print(f'Config push completed successfully!')
