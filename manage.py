@@ -15,7 +15,7 @@ def move_file(source_dir, target_dir, filepath):
     try:
         shutil.move(source, target)
     except OSError as error:
-        print(f'Moving config file `{filepath}` from `{source}` to `{target}` failed due to following error: \n{error}\nAborting ...')
+        print(f'\nMoving config file `{filepath}` from `{source}` to `{target}` failed due to following error: \n{error}\nAborting ...')
         return False
     return True
 
@@ -26,16 +26,18 @@ def move_directory(source_dir, target_dir, dirpath):
     try:
         shutil.copytree(source, target)
     except OSError as error:
-        print(f'Moving config files `{dirpath}*` from `{source}` to `{target}` failed due to following error: \n{error}\nAborting ...')
+        print(f'\nMoving config files `{dirpath}*` from `{source}` to `{target}` failed due to following error: \n{error}\nAborting ...')
         return False
     return True
 
 
 def move_thing(source_dir, target_dir, thingpath):
-    if thingpath[-1] == '/' and osp.isdir(thingpath): return move_directory(source_dir, target_dir, thingpath)
-    elif thingpath[-1] != '/' and osp.isfile(thingpath): return move_directory(source_dir, target_dir, thingpath)
+    if thingpath[-1] == '/' and osp.isdir(osp.join(source_dir, thingpath)): 
+        return move_directory(source_dir, target_dir, thingpath)
+    elif thingpath[-1] != '/' and osp.isfile(osp.join(source_dir, thingpath)): 
+        return move_directory(source_dir, target_dir, thingpath)
     else: 
-        print(f'Invalid path: {thingpath}\nAborting ...')
+        print(f'\nInvalid path: {thingpath}\nAborting ...')
         return False
 	
 
