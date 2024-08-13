@@ -13,7 +13,7 @@ def move_file(source_dir, target_dir, filepath):
     source = osp.join(source_dir, filepath)
     target = osp.join(target_dir, filepath)
     try:
-        shutil.move(source, target)
+        shutil.copyfile(source, target)
     except OSError as error:
         print(f'\nMoving config file `{filepath}` from `{source}` to `{target}` failed due to following error: \n{error}\nAborting ...')
         return False
