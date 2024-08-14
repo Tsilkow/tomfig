@@ -139,13 +139,12 @@ def push(config_set: str, tomfig_dir: str, verbose: bool=True):
     if verbose: print(f'\rPushing configs from local directories [DONE]', flush=True)
 
     with git.Repo(tomfig_dir) as repo:
-        origin = repo.remotes.origin
-        commit_message = get_commit_message(repo)
+        # commit_message = get_commit_message(repo)
         repo.git.add(update=True)
-        repo.index.commit(commit_message)
-        origin.push()
+        # repo.index.commit(commit_message)
+        # origin.push()
 
-    if verbose: print(f'Config push completed successfully!')
+    if verbose: print(f'Configs are ready to be pushed!')
     return True
 
 
