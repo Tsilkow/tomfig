@@ -92,8 +92,8 @@ def move_configs_from_target(tomfig_dir: str, configs: List[Config]):
 
 
 def move_configs_to_target(tomfig_dir: str, configs: List[Config]):
-    config_dir = osp.join(tomfig_dir, 'configs')
     for config in configs:
+        config_dir = get_config_dir(tomfig_dir, config)
         for filepath in config.filepaths:
             status = move_thing(config_dir, config.target_directory, filepath)
             if not status: return False
