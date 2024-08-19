@@ -2,6 +2,7 @@ return {
   'hrsh7th/nvim-cmp',
   dependencies = {
     'hrsh7th/cmp-nvim-lsp',
+    'VonHeikemen/lsp-zero.nvim',
   },
   config = function()
     local cmp = require('cmp')
@@ -13,12 +14,17 @@ return {
         {name = 'nvim_lsp'},
       },
       mapping = cmp.mapping.preset.insert({
-        ['<CR>'] = cmp.mapping.confirm({select = false}),
-        ['<C-CR>'] = cmp.mapping.complete(),
-        ['<C-f>'] = cmp_action.vim_snippet_jump_forward(),
-        ['<C-b>'] = cmp_action.vim_snippet_jump_backward(),
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-d>'] = cmp.mapping.scroll_docs(4),
+        -- <C-m> is interpreted as <C-CR>
+        ['<C-m>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true
+        }),
+        -- <C-m> is interpreted as <C-CR>
+        -- ['<C-m>'] = cmp.mapping.complete(),
+        ['<C-j>'] = cmp.mapping.select_next_item(),
+        ['<C-k>'] = cmp.mapping.select_prev_item(),
+        ['<C-h>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-l>'] = cmp.mapping.scroll_docs(4),
       }),
       snippet = {
         expand = function(args)

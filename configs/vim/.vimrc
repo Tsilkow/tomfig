@@ -1,6 +1,7 @@
-set nocompatible " required for vundle
+set nocompatible 
 
 set autoindent " Match indents on new lines.
+set colorcolumn=80,100
 set expandtab " use spaces instead of tabs.
 set gdefault " use the `g` flag by default.
 set history=1000
@@ -80,7 +81,7 @@ noremap <leader>l $
 " reserved for commenting
 noremap ' <Nop>
 nnoremap <leader><CR> o
-" nnoremap <S-CR> O
+nnoremap OM A
 
 noremap z u
 noremap Z U
