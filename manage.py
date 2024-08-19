@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import List
 import os
 import os.path as osp
@@ -6,7 +7,40 @@ import shutil
 import click
 import git
 
-from configs import Config, config_sets
+from metaconfig import configs as raw_configs, config_sets as raw_config_sets
+
+
+@dataclass
+class Config(object):
+    name: str
+    filepaths: List[str]
+    target_directory: str
+
+    def __repr__(self):
+        return f'{self.name}, {self.filepaths} -> {self.target_directory}'
+
+
+def read_metaconfig(verbose: bool=False):
+    configs = {}
+    config_sets = {}
+
+    for name, config in raw_configs.items():
+        if name in configs:
+            print(f'Config of name {name} has already been created. Discarding duplicate ...')
+            continue
+        configs[name] = Config(name=name, filepaths=config['filepaths'], target_directory=config['target_directory'])
+        config_sets[f'{name}_only'] = [configs[name]]
+
+    for name, config_names in raw_config_sets.items():
+        if name in config_sets:
+            print(f'Config set of name {name} has already been created. Discarding duplicate ...')
+            continue
+        config_sets[name] = [configs[c_name] for c_name in config_names]
+
+    if verbose:
+        print(f'Read metaconfig, found {len(configs)} configs and {len(config_sets)} config sets.')
+	
+    return config_sets
 
 
 def move_file(source_dir, target_dir, filepath):
@@ -33,18 +67,24 @@ def move_directory(source_dir, target_dir, dirpath):
 
 def move_thing(source_dir, target_dir, thingpath):
     full_thingpath = osp.join(source_dir, thingpath)
-    if thingpath[-1] == '/' and osp.isdir(full_thingpath): 
+    if thingpath == '*':
+        return move_directory(source_dir, target_dir, '')
+    elif thingpath[-1] == '/' and osp.isdir(full_thingpath): 
         return move_directory(source_dir, target_dir, thingpath)
     elif thingpath[-1] != '/' and osp.isfile(full_thingpath): 
         return move_file(source_dir, target_dir, thingpath)
     else: 
         print(f'\nInvalid path: {full_thingpath}\nAborting ...')
         return False
+
+
+def get_config_dir(tomfig_dir: str, config: Config):
+    return osp.join(tomfig_dir, 'configs', config.name)
 	
 
 def move_configs_from_target(tomfig_dir: str, configs: List[Config]):
-    config_dir = osp.join(tomfig_dir, 'configs')
     for config in configs:
+        config_dir = get_config_dir(tomfig_dir, config)
         for filepath in config.filepaths:
             status = move_thing(config.target_directory, config_dir, filepath)
             if not status: return False
@@ -89,7 +129,10 @@ DEFAULT_TOMFIG_DIR = f'{os.getenv("HOME")}/tomfig/'
 @click.option('--tomfig_dir', default=DEFAULT_TOMFIG_DIR, show_default=True, type=click.Path(exists=True))
 @click.option('--verbose/--silent', default=True)
 def pull(config_set: str, tomfig_dir: str, verbose: bool=True):
-    assert config_set in config_sets.keys()
+    config_sets = read_metaconfig(verbose)
+    if config_set not in config_sets: 
+        print(f'Selected config set {config_set} was not found in metaconfig. Aborting ...')
+        return False
     configs = config_sets[config_set]
     if verbose:
         print(f'Tomfig directory: {tomfig_dir}')
@@ -118,7 +161,10 @@ def pull(config_set: str, tomfig_dir: str, verbose: bool=True):
 @click.option('--tomfig_dir', default=DEFAULT_TOMFIG_DIR, show_default=True, type=click.Path(exists=True))
 @click.option('--verbose/--silent', default=True)
 def push(config_set: str, tomfig_dir: str, verbose: bool=True):
-    assert config_set in config_sets.keys()
+    config_sets = read_metaconfig(verbose)
+    if config_set not in config_sets: 
+        print(f'Selected config set {config_set} was not found in metaconfig. Aborting ...')
+        return False
     configs = config_sets[config_set]
     if verbose:
         print(f'Tomfig directory: {tomfig_dir}')
