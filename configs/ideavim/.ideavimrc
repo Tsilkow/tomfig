@@ -61,7 +61,7 @@ let mapleader=" "
 nnoremap <leader><Space> :action GotoAction<CR>
 
 " nnoremap q q
-nnoremape w c
+nnoremap w c
 nnoremap <leader>w :action SaveAs<CR>
 nnoremap e :NERDTreeToggle<CR>
 nnoremap r R

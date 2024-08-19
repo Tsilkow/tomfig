@@ -1,5 +1,5 @@
 return {
     'ActionScripted/tetris.nvim',
-	cmd = {'Tetris'},
+    cmd = { 'Tetris' },
 }
 
