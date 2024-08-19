@@ -65,17 +65,15 @@ def move_directory(source_dir, target_dir, dirpath):
     return True
 
 
-def move_thing(source_dir, target_dir, thingpath):
-    full_thingpath = osp.join(source_dir, thingpath)
+def move_thing(source_dir, target_dir, thingpath, create_dir_if_not_exist: bool=True):
+    if create_dir_if_not_exist and not osp.isdir(target_dir):
+        os.makedirs(target_dir)
     if thingpath == '*':
         return move_directory(source_dir, target_dir, '')
-    elif thingpath[-1] == '/' and osp.isdir(full_thingpath): 
+    elif thingpath[-1] == '/': 
         return move_directory(source_dir, target_dir, thingpath)
-    elif thingpath[-1] != '/' and osp.isfile(full_thingpath): 
+    else:
         return move_file(source_dir, target_dir, thingpath)
-    else: 
-        print(f'\nInvalid path: {full_thingpath}\nAborting ...')
-        return False
 
 
 def get_config_dir(tomfig_dir: str, config: Config):
