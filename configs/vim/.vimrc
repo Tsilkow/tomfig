@@ -58,7 +58,7 @@ noremap a <Nop>
 noremap A <Nop>
 nnoremap s v
 nnoremap S V
-" noremap d d
+noremap d "_d
 inoremap <C-d> <C-o>"_x
 noremap D "_x
 inoremap <C-D> <C-o>"_X
