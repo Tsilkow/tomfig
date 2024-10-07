@@ -10,6 +10,10 @@ configs = {
         'filepaths': ['*'],
         'target_directory': osp.join(HOME, '.config/kanata/'),
     },
+    'kanata_systemd': {
+        'filepaths': ['kanata.service'],
+        'target_directory': osp.join(HOME, '.config/systemd/user/'),
+    },
     'vim': {
         'filepaths': ['.vimrc'],
         'target_directory': HOME,
@@ -50,7 +54,7 @@ configs = {
 
 config_sets = {
     'remote': ['bash_aliases', 'vim', 'tmux_remote'],
-    'home': ['kanata', 'vim', 'bash_aliases', 'ideavim', 'tmux_home', 'neovim'],
+    'home': ['kanata', 'kanata_systemd', 'vim', 'bash_aliases', 'ideavim', 'tmux_home', 'neovim'],
     'test': ['test1', 'test2', 'test3'],
 }
 
