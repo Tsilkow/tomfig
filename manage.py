@@ -126,7 +126,7 @@ DEFAULT_TOMFIG_DIR = f'{os.getenv("HOME")}/tomfig/'
 @click.argument('config_set', type=str)
 @click.option('--tomfig_dir', default=DEFAULT_TOMFIG_DIR, show_default=True, type=click.Path(exists=True))
 @click.option('--verbose/--silent', default=True)
-def pull(config_set: str, tomfig_dir: str, verbose: bool=True):
+def push_to_local(config_set: str, tomfig_dir: str, verbose: bool=True):
     config_sets = read_metaconfig(verbose)
     if config_set not in config_sets: 
         print(f'Selected config set {config_set} was not found in metaconfig. Aborting ...')
@@ -146,11 +146,11 @@ def pull(config_set: str, tomfig_dir: str, verbose: bool=True):
     #     origin = repo.remotes.origin
     #     origin.pull()
 
-    if verbose: print(f'\rPulling configs to local directories ...', end='', flush=True)
+    if verbose: print(f'\rPushing configs to local directories ...', end='', flush=True)
     if not move_configs_to_target(tomfig_dir, configs): return False
-    if verbose: print(f'\rPulling configs to local directories [DONE]', flush=True)
+    if verbose: print(f'\rPushing configs to local directories [DONE]', flush=True)
 
-    if verbose: print(f'Config update completed successfully!')
+    if verbose: print(f'Local config update completed successfully!')
     return True
 
 
@@ -158,7 +158,7 @@ def pull(config_set: str, tomfig_dir: str, verbose: bool=True):
 @click.argument('config_set', type=str)
 @click.option('--tomfig_dir', default=DEFAULT_TOMFIG_DIR, show_default=True, type=click.Path(exists=True))
 @click.option('--verbose/--silent', default=True)
-def push(config_set: str, tomfig_dir: str, verbose: bool=True):
+def pull_from_local(config_set: str, tomfig_dir: str, verbose: bool=True):
     config_sets = read_metaconfig(verbose)
     if config_set not in config_sets: 
         print(f'Selected config set {config_set} was not found in metaconfig. Aborting ...')
@@ -178,9 +178,9 @@ def push(config_set: str, tomfig_dir: str, verbose: bool=True):
         origin = repo.remotes.origin
         origin.pull()
 
-    if verbose: print(f'\rPushing configs from local directories ...', end='', flush=True)
+    if verbose: print(f'\rPulling configs from local directories ...', end='', flush=True)
     if not move_configs_from_target(tomfig_dir, configs): return False
-    if verbose: print(f'\rPushing configs from local directories [DONE]', flush=True)
+    if verbose: print(f'\rPulling configs from local directories [DONE]', flush=True)
 
     with git.Repo(tomfig_dir) as repo:
         # Commented out to allow better control over pushed files
@@ -189,7 +189,7 @@ def push(config_set: str, tomfig_dir: str, verbose: bool=True):
         # repo.index.commit(commit_message)
         # origin.push()
 
-    if verbose: print(f'Configs are ready to be pushed!')
+    if verbose: print(f'Configs are ready to be pushed to the repository!')
     return True
 
 
