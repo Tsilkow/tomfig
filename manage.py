@@ -138,13 +138,13 @@ def pull(config_set: str, tomfig_dir: str, verbose: bool=True):
         for config in configs:
             print(config)
 
-    with git.Repo(tomfig_dir) as repo:
-        if repo.bare:
-            print(f'No repository found at {tomfig_dir}. Aborting ...')
-            return False
-    	
-        origin = repo.remotes.origin
-        origin.pull()
+    # with git.Repo(tomfig_dir) as repo:
+    #     if repo.bare:
+    #         print(f'No repository found at {tomfig_dir}. Aborting ...')
+    #         return False
+    # 	
+    #     origin = repo.remotes.origin
+    #     origin.pull()
 
     if verbose: print(f'\rPulling configs to local directories ...', end='', flush=True)
     if not move_configs_to_target(tomfig_dir, configs): return False
