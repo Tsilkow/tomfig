@@ -1,0 +1,78 @@
+(defcfg override-release-on-activation yes)
+
+(defsrc
+  esc     f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(defalias
+  pla  RA-a
+  plc  RA-c
+  ple  RA-e
+  pll  RA-l
+  pln  RA-n
+  plo  RA-o
+  pls  RA-s
+  plx  RA-x
+  plz  RA-z
+)
+
+(defalias
+  qwe (layer-switch qwerty)
+  pol (one-shot 500 (layer-while-held polish))
+  sym (layer-switch symbols)
+)
+
+(defoverrides
+  (;) (lsft ;)
+  (lsft ;) (;)
+  (rsft ;) (;)
+  (lsft ,) (lsft 9)
+  (rsft ,) (rsft 9)
+  (lsft 9) (lsft ,)
+  (rsft 9) (rsft ,)
+  (lsft .) (lsft 0)
+  (rsft .) (rsft 0)
+  (lsft 0) (lsft .)
+  (rsft 0) (rsft .)
+  (lalt a) (ralt a)
+  (lalt c) (ralt c)
+  (lalt e) (ralt e)
+  (lalt l) (ralt l)
+  (lalt n) (ralt n)
+  (lalt o) (ralt o)
+  (lalt s) (ralt s)
+  (lalt x) (ralt x)
+  (lalt z) (ralt z)
+)
+
+(deflayer qwerty
+  caps    f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  esc  a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lalt lmet lctl           spc            ralt rmet rctl
+)
+
+(deflayer symbols
+  caps    f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    y    [    ]    p    [    ]    \
+  esc  a    s    d    f    g    h    h   S-,  S-.    ;    '    ret
+  lsft z    x    c    v    b    n    n   S-[  S-]    /    rsft
+  lalt lmet lctl           spc            ralt rmet rctl
+)
+
+(deflayer polish
+  caps    f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
+  grv   1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab   q    w   @ple  r    t    y    u    i  @plo   p    [    ]    \
+  esc  @pla @pls  d    f    g    h    j    k  @pll   ;    '    ret
+  lsft @plz @plx @plc  v    b   @pln   m    ,    .    /    rsft
+  lalt lmet lctl           spc            ralt rmet rctl
+)
