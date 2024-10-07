@@ -8,6 +8,7 @@ set history=1000
 set hlsearch " highlight search
 set ignorecase " case insensitive search
 set incsearch
+set number
 set relativenumber
 set scrolloff=5
 set shiftround " tab / shifting moves to closest tabstop.
@@ -38,13 +39,14 @@ noremap t <Nop>
 " inoremap <C-y> <C-o>:action copilot.requestCompletion<CR>
 noremap u b
 inoremap <C-u> <C-o>b
-inoremap <C-i> <C-o>w
 noremap U B
-noremap i w
-noremap I W
-noremap o %
-noremap O %
-noremap p J
+noremap i e
+inoremap <C-i> <C-o>e
+noremap I E
+noremap o w
+noremap O W
+noremap p %
+noremap P J
 
 inoremap <Tab> <C-v><Tab>
 nnoremap <Tab> >>
