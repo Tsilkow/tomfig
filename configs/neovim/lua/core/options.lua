@@ -1,5 +1,5 @@
 local opts = {
-    spelllang = 'en_us',
+    spelllang = 'en_us,pl',
     spell = true,
 }
 

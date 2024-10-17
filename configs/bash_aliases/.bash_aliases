@@ -29,3 +29,5 @@ alias tmls='tmux ls'
 alias tmcp='tmux show-buffer | xclip -selection clipboard'
 
 alias dps='docker ps'
+
+alias python='python3'
