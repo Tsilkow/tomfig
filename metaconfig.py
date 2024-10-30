@@ -14,7 +14,7 @@ configs = {
     'ideavim': osp.join(HOME, '.ideavimrc'),
     'tmux': osp.join(HOME, '.tmux.conf'),
     'neovim': osp.join(HOME, '.config/nvim'),
-    'test': osp.join(HOME, 'dotfiles/test'),
+    'test': osp.join(HOME, 'tomfig/test'),
 }
 
 config_sets = {
