@@ -1,0 +1,35 @@
+set -g default-terminal "xterm-256color"
+set -g mouse on
+setw -g mode-keys vi
+set-option -sg escape-time 10
+set-option -g focus-events on
+set-option -a terminal-features 'xterm-256color:RGB'
+
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @yank_action 'copy-pipe-no-clear'
+bind -T copy-mode-vi c send -X copy-pipe-and-cancel "xsel -i --clipboard"
+bind -T copy-mode-vi Enter send -X copy-pipe-and-cancel "xsel -i --clipboard"
+
+unbind C-b
+unbind C-w
+unbind C-y
+set-option -g prefix C-Space
+bind-key C-Space send-prefix
+bind-key -n C-y copy-mode
+bind-key -n C-w select-pane -R
+
+bind | split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+bind r source-file ~/.tmux.conf
+
+bind h select-pane -L
+bind l select-pane -R
+bind k select-pane -U
+bind j select-pane -D
+
+# Keep at the bottom
+run '~/.tmux/plugins/tpm/tpm'

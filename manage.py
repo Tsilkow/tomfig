@@ -1,6 +1,6 @@
 from collections import Counter
 import click
-from shutil import copy, copytree
+from shutil import copy, copytree, rmtree
 from enum import Enum
 import os
 import os.path as osp
@@ -8,7 +8,7 @@ from typing import Dict, Tuple
 from metaconfig import configs as raw_configs, config_sets as raw_config_sets
 
 
-DEFAULT_TOMFIG_ROOT = f'{os.getenv("HOME")}/tomfig_v2/' 
+DEFAULT_TOMFIG_ROOT = f'{os.getenv("HOME")}/tomfig/' 
 
 
 class Status(Enum):
@@ -98,6 +98,7 @@ def create_symlink(tomfig_root: str, config_name: str, config_path: str) -> None
     None
     """
     tomfig_dir = osp.join(tomfig_root, 'configs', config_name)
+    print(config_path, osp.dirname(config_path))
     os.makedirs(osp.dirname(config_path), exist_ok=True)
     os.symlink(tomfig_dir, config_path)
 
@@ -115,15 +116,17 @@ def handle_not_link(tomfig_root: str, config_name: str, config_path: str, do_bac
     Returns:
     None
     """
-    if do_backups:
-        backup_path = osp.join(osp.dirname(config_path), osp.basename(config_path)+'.bckp')
-        if osp.isfile(config_path):
+    backup_path = osp.join(osp.dirname(config_path), osp.basename(config_path)+'.bckp')
+    if osp.isfile(config_path):
+        if do_backups:
             copy(config_path, backup_path)
-        elif osp.isdir(config_path):
+        os.remove(config_path)
+    elif osp.isdir(config_path):
+        if do_backups:
             copytree(config_path, backup_path)
-        else:
-            raise Exception('Neither a file nor a directory')
-    os.remove(config_path)
+        rmtree(config_path)
+    else:
+        raise Exception('Neither a file nor a directory')
     create_symlink(tomfig_root, config_name, config_path)
 
 
@@ -346,7 +349,7 @@ def read_metaconfig(verbose: bool=False) -> Dict[str, Dict[str, str]]:
         if name in configs:
             print(f'Config of name {name} has already been created. Discarding duplicate ...')
             continue
-        configs[name] = config
+        configs[name] = config.rstrip('/')
         config_sets[f'{name}_only'] = {name: configs[name]}
 
     for name, config_names in raw_config_sets.items():

@@ -1,0 +1,138 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=0
+
+set ignorecase " case insensitive search
+set smartcase " If there are uppercase letters, become case-sensitive.
+set incsearch " live incremental searching
+set showmatch " live match highlighting
+set hlsearch " highlight matches
+set gdefault " use the `g` flag by default.
+
+set virtualedit=onemore " Allow moving one character past the end of the line.
+
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab " use spaces instead of tabs.
+set smarttab " let's tab key insert 'tab stops', and bksp deletes tabs.
+set shiftround " tab / shifting moves to closest tabstop.
+set autoindent " Match indents on new lines.
+set smartindent " Intellegently dedent / indent new lines based on rules.
+
+" Use the clipboard to copy and paste between Vim and other programs.
+" set clipboard+=unnamed  " use the clipboards of vim and win
+" set paste               " Paste from a windows or from vim
+" set go+=a
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+Plug 'preservim/nerdtree'
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+inoremap <C-Esc> :action EditorEscape<CR>
+nnoremap <Space> <Nop>
+nnoremap <CR> i
+let mapleader=" "
+nnoremap <leader><Space> :action GotoAction<CR>
+
+" nnoremap q q
+nnoremap w c
+nnoremap <leader>w :action SaveAs<CR>
+nnoremap e :NERDTreeToggle<CR>
+nnoremap r R
+noremap t .
+noremap y <Nop>
+noremap u b
+inoremap <C-u> <C-o>b
+inoremap <C-i> <C-o>w
+noremap U B
+noremap i w
+noremap I W
+noremap o %
+noremap O %
+noremap p J
+noremap [ :action PreviousTab<CR>
+noremap ] :action NextTab<CR>
+noremap \ :action NextSplitter<CR>
+
+nnoremap <Tab> >>
+vnoremap <Tab> >gv
+nnoremap <S-Tab> <<
+vnoremap <S-Tab> <gv
+nnoremap <leader><Tab> ==
+vnoremap <leader><Tab> =gv
+nnoremap a v:action EditorSelectWord<CR>
+nnoremap A v:action EditorUnSelectWord<CR>
+vnoremap a :action EditorSelectWord<CR>
+vnoremap A :action EditorUnSelectWord<CR>
+nnoremap s v
+nnoremap S V
+noremap d "_x
+inoremap <C-d> <C-o>"_x
+noremap D "_X
+inoremap <C-D> <C-o>"_X
+noremap <leader>d "_dd
+" noremap f f
+" noremap F F
+" noremap g g
+inoremap <C-h> <Left>
+noremap <leader>h ^
+inoremap <C-j> <Down>
+noremap <leader>j }
+inoremap <C-k> <Up>
+noremap J <C-d>
+noremap <leader>k {
+inoremap <C-l> <Right>
+noremap K <C-u>
+noremap <leader>l $
+noremap ; ;
+noremap : :
+nnoremap <leader><CR> o
+" nnoremap <S-CR> O
+
+noremap z u
+noremap Z U
+noremap <leader>z <C-r>
+noremap x d
+noremap <leader>x "+d
+noremap c y
+noremap <leader>c "+y
+noremap v p
+noremap <leader>v "+p
+cnoremap <c-v> <c-r>0
+noremap V P
+noremap <leader>V "+P
+noremap b :action Back<CR>
+" noremap n n
+noremap m :action GotoDeclaration<CR>
+noremap <leader>m :action RenameElement<CR>
+noremap , :action ShowParameterInfo<CR>
+noremap . :action ShowErrorDescription<CR>
+noremap <leader>/ :action CommentByLineComment<CR>
+" noremape / /
+" noremap ? ?
