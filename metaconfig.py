@@ -14,10 +14,12 @@ configs = {
     'ideavim': osp.join(HOME, '.ideavimrc'),
     'tmux': osp.join(HOME, '.tmux.conf'),
     'neovim': osp.join(HOME, '.config/nvim'),
-    'test': osp.join(HOME, 'tomfig/test'),
+    'test1': osp.join(HOME, 'tomfig_v2/tests/test_with_repo'),
+    'test2': osp.join(HOME, 'tomfig_v2/tests/test_no_repo'),
 }
 
 config_sets = {
     'remote': ['bash_config', 'vim', 'tmux'],
     'home': ['kanata', 'kanata_systemd', 'vim', 'kitty', 'bash_config', 'ideavim', 'tmux', 'neovim'],
+    'tests': ['test1', 'test2']
 }
