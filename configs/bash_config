@@ -38,13 +38,16 @@ POWERLINE_BREAK=$'\uE0BC'
 POWERLINE_BREAK_REVERSE=$'\uE0BA'
 PIPE_RIGHT_DOWN=$'\u250C'
 PIPE_UP_RIGHT=$'\u2514'
+PIPE_RIGHT_LEFT=$'\u2500'
 PROMPT_UI_COLOR="7" # white
 PROMPT_TIME_COLOR="2" # green
 PROMPT_USER_COLOR="4" # blue
-PROMPT_HOST_COLOR="0" # green
+PROMPT_HOME_COLOR="3" # yellow
+PROMPT_REMOTE_COLOR="6" # cyan
 PROMPT_GIT_COLOR="3" # yellow
 PROMPT_VENV_COLOR="6" # cyan
 PROMPT_DIR_COLOR="1" # red
+PROMPT_IS_HOME=true
 
 ansi_escape() {
     local IFS=';'
@@ -82,7 +85,13 @@ set_bash_prompt() {
     PS1="${COLOR_RESET}${PROMPT_START_UP}"
     PS1="${PS1}$(ansi_fg ${PROMPT_TIME_COLOR}) \A "
     PS1="${PS1}${SEPARATOR}"
-    PS1="${PS1}$(ansi_fg ${PROMPT_USER_COLOR}) \u "
+    PS1="${PS1}$(ansi_fg ${PROMPT_USER_COLOR}) \u"
+    if [[ $PROMPT_IS_HOME = true ]]
+    then
+        PS1="${PS1}$(ansi_fg ${PROMPT_HOME_COLOR})@\h "
+    else
+        PS1="${PS1}$(ansi_fg ${PROMPT_REMOTE_COLOR})@\h "
+    fi
     # PS1="${PS1}$(segment_separator ${previous_color} ${PROMPT_HOST_COLOR})"
     # PS1="${PS1}$(ansi_fg_bg 9 ${PROMPT_HOST_COLOR}) \h "
     # previous_color=${PROMPT_HOST_COLOR}
@@ -90,7 +99,7 @@ set_bash_prompt() {
     then
         venv_name=$(basename $VIRTUAL_ENV)
         PS1="${PS1}${SEPARATOR}"
-        PS1="${PS1}$(ansi_fg ${PROMPT_VENV_COLOR}) ${venv_name} "
+        PS1="${PS1}$(ansi_fg ${PROMPT_VENV_COLOR}) venv=${venv_name} "
     fi
     PS1="${PS1}$(ansi_fg_bg 0 9)${POWERLINE_ARROW} "
     PS1="${PS1}$(ansi_fg ${PROMPT_DIR_COLOR})\w"
@@ -99,6 +108,7 @@ set_bash_prompt() {
         PS1="${PS1}$(ansi_fg ${PROMPT_GIT_COLOR}) (${git_branch}) "
     fi
     PS1="${PS1}${COLOR_RESET}\n${PROMPT_START_DOWN} "
+    PS2="${PIPE_RIGHT_LEFT}> "
 }
 
 PROMPT_COMMAND=set_bash_prompt
