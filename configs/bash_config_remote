@@ -16,6 +16,8 @@ function dex () {
     docker exec -ti "$1" bash
 }
 
+alias ll='ls -lAh'
+
 alias sudo='sudo '
 
 alias gis='git status'
@@ -47,7 +49,7 @@ PROMPT_REMOTE_COLOR="6" # cyan
 PROMPT_GIT_COLOR="3" # yellow
 PROMPT_VENV_COLOR="6" # cyan
 PROMPT_DIR_COLOR="1" # red
-PROMPT_IS_HOME=true
+PROMPT_IS_HOME=false
 
 ansi_escape() {
     local IFS=';'
