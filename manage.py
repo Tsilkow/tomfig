@@ -1,10 +1,12 @@
 from collections import Counter
-import click
 from shutil import copy, copytree, rmtree
 from enum import Enum
 import os
 import os.path as osp
 from typing import Dict, Tuple
+
+import click
+
 from metaconfig import configs as raw_configs, config_sets as raw_config_sets
 
 
