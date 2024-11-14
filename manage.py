@@ -177,17 +177,16 @@ def setup(
 	
     for config_name, status in report.items():
         config_path = config_set[config_name]
-        match status:
-            case Status.REPO_MISSING:
-                continue
-            case Status.LOCAL_MISSING:
-                create_symlink(tomfig_root, config_name, config_path)
-            case Status.NOT_LINK:
-                handle_not_link(tomfig_root, config_name, config_path, do_backups)
-            case Status.INCORRECT:
-                handle_incorrect(tomfig_root, config_name, config_path, overwrite_links)
-            case Status.CORRECT:
-                continue
+        if status == Status.REPO_MISSING:
+            continue
+        elif status == Status.LOCAL_MISSING:
+            create_symlink(tomfig_root, config_name, config_path)
+        elif status == Status.NOT_LINK:
+            handle_not_link(tomfig_root, config_name, config_path, do_backups)
+        elif status == Status.INCORRECT:
+            handle_incorrect(tomfig_root, config_name, config_path, overwrite_links)
+        elif status == Status.CORRECT:
+            continue
 
     return check_symlinks(tomfig_root, config_set, verbose)[0]
 
