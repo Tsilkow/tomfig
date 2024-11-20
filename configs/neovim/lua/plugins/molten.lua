@@ -1,7 +1,7 @@
 return {
 {
     'jmbuhr/otter.nvim',
-    enabled=false,
+    -- enabled=false,
     dev = false,
     dependencies = {
         'neovim/nvim-lspconfig',
@@ -16,7 +16,7 @@ return {
 },
 {
     'quarto-dev/quarto-nvim',
-    enabled=false,
+    -- enabled=false,
     ft = {'quarto', 'markdown'},
     config = function()
         require('quarto').setup({
@@ -56,7 +56,7 @@ return {
 },
 {
     'GCBallesteros/jupytext.nvim',
-    enabled=false,
+    -- enabled=false,
     config = function()
         require('jupytext').setup({
             custom_language_formatting = {
@@ -97,7 +97,7 @@ return {
 },
 {
 	'benlubas/molten-nvim',
-    enabled=false,
+    -- enabled=false,
     dependencies = { "3rd/image.nvim" },
     build = ":UpdateRemotePlugins",
     init = function()

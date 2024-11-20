@@ -34,6 +34,8 @@ alias dps='docker ps'
 
 alias python='python3'
 
+alias nvim='venv ~/.venvs/nvim && nvim'
+
 
 POWERLINE_ARROW=$'\uE0B0'
 POWERLINE_BREAK=$'\uE0BC'
