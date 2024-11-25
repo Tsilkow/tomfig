@@ -25,10 +25,10 @@ class Status(Enum):
 
 
 def check_symlinks(
-        tomfig_root: str, config_set: Dict[str, str], verbose: bool=True
+    tomfig_root: str, config_set: Dict[str, str], verbose: bool=True
 ) -> Tuple[bool, Dict[str, Status]]:
     """
-	Looks through all configs in a given config sets and establishes their status.
+    Looks through all configs in a given config sets and establishes their status.
 
     Arguments:
     tomfig_root(str): path to `tomfig/` directory.
@@ -154,14 +154,14 @@ def handle_incorrect(
 
 
 def setup(
-        tomfig_root: str, 
-        config_set: Dict[str, str], 
-        do_backups: bool, 
-        overwrite_links: bool, 
-        verbose: bool=True
+    tomfig_root: str, 
+    config_set: Dict[str, str], 
+    do_backups: bool, 
+    overwrite_links: bool, 
+    verbose: bool=True
 ) -> bool:
     """
-	Sets up config symlinks based on assesment of current environment. 
+    Sets up config symlinks based on assesment of current environment. 
     In case of config present in metaconfig, but absent in `configs/`,
     it does nothing.
 
@@ -176,7 +176,7 @@ def setup(
     """
     is_all_correct, report = check_symlinks(tomfig_root, config_set, verbose)
     if is_all_correct: return True
-	
+
     for config_name, status in report.items():
         config_path = config_set[config_name]
         if status == Status.REPO_MISSING:
@@ -194,14 +194,14 @@ def setup(
 
 
 def move_to_tomfig(
-        tomfig_root: str, 
-        config_name: str, 
-        config_path: str, 
-        do_backups: bool,
+    tomfig_root: str, 
+    config_name: str, 
+    config_path: str, 
+    do_backups: bool,
 ) -> bool:
 
     """
-	Moves config from its local path to tomfig and creates symlink from 
+    Moves config from its local path to tomfig and creates symlink from 
     its orignal path. 
 
     Arguments:
@@ -234,12 +234,12 @@ def move_to_tomfig(
     handle_not_link(tomfig_root, config_name, config_path, do_backups)
 
     return True
-	
+
 
 def test_no_local():
     config = {'test1': raw_configs['test1']} 
     is_all_correct, report = \
-    	check_symlinks(DEFAULT_TOMFIG_ROOT, config, False)
+    check_symlinks(DEFAULT_TOMFIG_ROOT, config, False)
     assert(not is_all_correct)
     assert(report['test1'] == Status.LOCAL_MISSING)
 
@@ -253,8 +253,8 @@ def test_no_local():
 def test_not_link():
     config = {'test1': raw_configs['test1']} 
     test_content = "Whispers of the breeze,\n" \
-                   "Cherry blossoms kiss the sky,\n" \
-                   "Spring’s sweet breath awakens.\n"
+        "Cherry blossoms kiss the sky,\n" \
+        "Spring’s sweet breath awakens.\n"
     with open(raw_configs['test1'], 'w') as file:
         file.write(test_content)
 
@@ -279,7 +279,7 @@ def test_incorrect():
     os.symlink(DEFAULT_TOMFIG_ROOT, raw_configs['test1'])
 
     is_all_correct, report = \
-    	check_symlinks(DEFAULT_TOMFIG_ROOT, {'test1': raw_configs['test1']}, False)
+    check_symlinks(DEFAULT_TOMFIG_ROOT, {'test1': raw_configs['test1']}, False)
     assert(not is_all_correct)
     assert(report['test1'] == Status.INCORRECT)
 
@@ -295,7 +295,7 @@ def test_correct():
     create_symlink(DEFAULT_TOMFIG_ROOT, 'test1', config['test1'])
 
     is_all_correct, report = \
-    	check_symlinks(DEFAULT_TOMFIG_ROOT, config, False)
+    check_symlinks(DEFAULT_TOMFIG_ROOT, config, False)
     assert(is_all_correct)
     assert(report['test1'] == Status.CORRECT)
 
@@ -307,14 +307,14 @@ def test_move_to_tomfig():
     config = {'test2': raw_configs['test2']} 
 
     is_all_correct, report = \
-    	check_symlinks(DEFAULT_TOMFIG_ROOT, config, False)
+    check_symlinks(DEFAULT_TOMFIG_ROOT, config, False)
     assert(not is_all_correct)
     assert(report['test2'] == Status.REPO_MISSING)
 
     move_to_tomfig(DEFAULT_TOMFIG_ROOT, 'test2', raw_configs['test2'], True)
 
     is_all_correct, report = \
-    	check_symlinks(DEFAULT_TOMFIG_ROOT, config, False)
+    check_symlinks(DEFAULT_TOMFIG_ROOT, config, False)
     assert(is_all_correct)
     assert(report['test2'] == Status.CORRECT)
 
@@ -387,15 +387,15 @@ def check(config_set: str, tomfig_root: str, verbose: bool=True) -> None:
 @click.option('--overwrite-links', default=True, show_default=True, type=bool)
 @click.option('--verbose/--silent', default=True)
 def setup_cli(
-        config_set: str, 
-        tomfig_root: str, 
-        backup: bool, 
-        overwrite_links: bool, 
-        verbose: bool=True
+    config_set: str, 
+    tomfig_root: str, 
+    backup: bool, 
+    overwrite_links: bool, 
+    verbose: bool=True
 ) -> None:
     config_sets = read_metaconfig(verbose=verbose)
     setup(tomfig_root, config_sets[config_set], backup, overwrite_links, verbose)
-    
+
 
 @cli.command('move-to-tomfig')
 @click.argument('config_set', type=str)
@@ -403,10 +403,10 @@ def setup_cli(
 @click.option('--backup', default=True, show_default=True, type=bool)
 @click.option('--verbose/--silent', default=True)
 def move_to_tomfig_cli(
-        config_set: str, 
-        tomfig_root: str, 
-        backup: bool, 
-        verbose: bool=True
+    config_set: str, 
+    tomfig_root: str, 
+    backup: bool, 
+    verbose: bool=True
 ) -> None:
     config_sets = read_metaconfig(verbose=verbose)
     selected_config = config_sets[config_set]

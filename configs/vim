@@ -10,7 +10,6 @@ set hlsearch " highlight search
 set ignorecase " case insensitive search
 set incsearch
 set lcs+=space:·
-set list
 set number
 set relativenumber
 set scrolloff=5
@@ -36,80 +35,124 @@ noremap <Space> <Nop>
 nnoremap <CR> i
 let mapleader=" "
 
-" nnoremap q q
-nnoremap w <C-w><C-w>
-nnoremap e <Nop>
+" q for recording
+" nnoremap q q 
+" w for switching panes
+nnoremap w <C-w><C-w> 
+" e is for edit file
+nnoremap e :e
+" r for replace
 nnoremap r R
-noremap t <Nop>
+" t is for 'till
+noremap t t
+" y is for jupyter commands
 " inoremap <C-y> <C-o>:action copilot.requestCompletion<CR>
+" u is for before word
 noremap u b
 inoremap <C-u> <C-o>b
 noremap U B
+" i is for after word
 noremap i e
 inoremap <C-i> <C-o>e
 noremap I E
+" o is for next word
 noremap o w
 noremap O W
+" p is for matching parenthasis
 noremap p %
+" P is for joining
 noremap P J
 
+" Tab is for indenting
 inoremap <Tab> <C-v><Tab>
 nnoremap <Tab> >>
 vnoremap <Tab> >gv
+" S-Tab is for unindenting
 nnoremap <S-Tab> <<
 vnoremap <S-Tab> <gv
+" Space-Tab is for formatting
 nnoremap <leader><Tab> ==
 vnoremap <leader><Tab> =gv
-" reserved for expand/shrink selection
+" a is unused
 noremap a <Nop>
 noremap A <Nop>
+" s is for visual mode (also expand/shrink in treesitter)
 nnoremap s v
 nnoremap S V
+" d is for delete operator to empty register
 noremap d "_d
+" C-d is for delete character
+noremap <C-d> "_x
 inoremap <C-d> <C-o>"_x
-noremap D "_x
+" D is for delete word
+noremap D "_dd
 inoremap <C-D> <C-o>"_X
-noremap <leader>d "_dd
+" f is for until 
 " noremap f f
+" F is for until in reverse
 " noremap F F
+" g is goto
 " noremap g g
 inoremap <C-h> <Left>
+" Space-h is for beginning of line
 noremap <leader>h ^
 inoremap <C-j> <Down>
+cnoremap <C-j> <Down>
+" Space-j is for go to next empty line
 noremap <leader>j }
 inoremap <C-k> <Up>
+cnoremap <C-k> <Up>
+" J is for go down half a page
 noremap J <C-d>
+" Space-j is for go to previous empty line
 noremap <leader>k {
 inoremap <C-l> <Right>
+" K is for go up half a page
 noremap K <C-u>
+" Space-l is for beginning of line
 noremap <leader>l $
+" ; is for repeat previous motion
 " noremap ; ;
+" : is for command
 " noremap : :
-" reserved for commenting
+" ' is for commenting (comment)
 noremap ' <Nop>
+" Space-Enter is for newline + enter insert
 nnoremap <leader><CR> o
+" Shift-Enter is for append
 nnoremap <S-CR> a
 
-noremap z u
-noremap Z U
+" z is for undo
+nnoremap z u
+nnoremap Z U
+" Space-z is for redo
 noremap <leader>z <C-r>
+" x is for cut
 noremap x d
 noremap X D
+" Space-x is for cut to system clipboard
 noremap <leader>x "+d
+" c is for copy
 noremap c y
+" Space-c is for copy to system clipboard
 noremap <leader>c "+y
+" v is for paste
 noremap v p
 noremap V P
+" Space-v is for paste from system clipboard
 noremap <leader>v "+p
 noremap <leader>V "+P
 cnoremap <c-v> <c-r>0
-" reserved for buffer actions
+" b is for show buffers
 noremap b :b <C-d> 
 noremap B <Nop>
+" n is for next
 " noremap n n
+" m is for goto mark
 noremap m '
+" space-m is for set mark
 noremap <leader>m m
-" reserved for show parameters
+" , is for hover (lsp)
 noremap , <Nop>
 " noremap . .
 " noremap / /
