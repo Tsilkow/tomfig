@@ -9,6 +9,8 @@ set history=1000
 set hlsearch " highlight search
 set ignorecase " case insensitive search
 set incsearch
+set lcs+=space:·
+set list
 set number
 set relativenumber
 set scrolloff=5
