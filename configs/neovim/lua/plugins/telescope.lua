@@ -1,4 +1,5 @@
 return {
+{
     'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -13,4 +14,9 @@ return {
         vim.keymap.set('n', '<leader>b', builtin.help_tags,
             { desc = 'Telescope help tags' })
     end
+},
+{
+    'stevearc/dressing.nvim',
+    opts = {},
+},
 }
