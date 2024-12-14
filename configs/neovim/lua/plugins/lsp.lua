@@ -1,38 +1,39 @@
 return {
-    {
-        'williamboman/mason.nvim',
-        config = function()
-            require('mason').setup({})
-        end
-    },
-    {
-        'williamboman/mason-lspconfig.nvim',
-        config = function()
-            require('mason-lspconfig').setup({
-                ensure_installed = {'lua_ls', 'pyright'}
-            })
-        end
-    },
-    {
-        'neovim/nvim-lspconfig',
-        config = function()
-            local lspconfig = require('lspconfig')
-        	lspconfig.lua_ls.setup({})
-            lspconfig.pyright.setup({})
+  {
+    'williamboman/mason.nvim',
+    config = function()
+      require('mason').setup({})
+    end
+  },
+  {
+    'williamboman/mason-lspconfig.nvim',
+    config = function()
+      require('mason-lspconfig').setup({
+        ensure_installed = {'lua_ls', 'pyright', 'gopls'}
+      })
+    end
+  },
+  {
+    'neovim/nvim-lspconfig',
+    config = function()
+      local lspconfig = require('lspconfig')
+      lspconfig.lua_ls.setup({})
+      lspconfig.pyright.setup({})
+      lspconfig.gopls.setup({})
 
-            vim.keymap.set('n', ',', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-            vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-            vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-            vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-            vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-            vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>', opts)
-            vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-            vim.keymap.set('n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-            vim.keymap.set('n', '<leader>f', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
-            -- vim.keymap.set({'n', 'x'}, '<leader><Tab>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-            vim.keymap.set('n', '<leader> ', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-        end
-    }
+      vim.keymap.set('n', ',', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+      vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+      vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+      vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+      vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+      vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>', opts)
+      vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+      vim.keymap.set('n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+      vim.keymap.set('n', '<leader>f', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
+      -- vim.keymap.set({'n', 'x'}, '<leader><Tab>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+      vim.keymap.set('n', '<leader> ', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+    end
+  }
 }
 --         'VonHeikemen/lsp-zero.nvim',
 --   branch = 'v4.x',
