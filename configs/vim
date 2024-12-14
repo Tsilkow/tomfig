@@ -17,7 +17,7 @@ set shiftround " tab / shifting moves to closest tabstop.
 set shiftwidth=4
 set showmatch
 set smartcase
-set smartindent " Intellegently dedent / indent new lines based on rules.
+set smartindent " Intelligently deindent / indent new lines based on rules.
 set smarttab " let's tab key insert 'tab stops', and bksp deletes tabs.
 set softtabstop=4
 set tabstop=4
