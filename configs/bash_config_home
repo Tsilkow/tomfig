@@ -22,6 +22,8 @@ alias sudo='sudo '
 
 alias gis='git status'
 
+alias gip='git pull'
+
 alias gid='git diff'
 
 alias giau='git add -u'
