@@ -41,6 +41,7 @@ let mapleader=" "
 nnoremap w <C-w><C-w> 
 " e is for edit file
 nnoremap e :e
+nnoremap <C-e> $
 " r is for replace
 nnoremap r R
 " R is for subsitute
@@ -76,6 +77,7 @@ vnoremap <S-Tab> <gv
 nnoremap <leader><Tab> ==
 vnoremap <leader><Tab> =gv
 " a is unused
+nnoremap <C-a> ^
 noremap a <Nop>
 noremap A <Nop>
 " s is for visual mode (also expand/shrink in treesitter)
