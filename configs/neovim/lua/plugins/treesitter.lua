@@ -59,7 +59,7 @@ return {
             lookahead = true, -- you can change this if you want
             keymaps = {
               --- ... other keymaps
-              ["ib"] = { query = "@code_cell.inner", desc = "in block" },
+              ["sb"] = { query = "@code_cell.inner", desc = "in block" },
               ["ab"] = { query = "@code_cell.outer", desc = "around block" },
             },
           },
