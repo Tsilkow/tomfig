@@ -10,7 +10,7 @@ import click
 from metaconfig import configs as raw_configs, config_sets as raw_config_sets
 
 
-DEFAULT_TOMFIG_ROOT = f'{os.getenv("HOME")}/tomfig/' 
+DEFAULT_TOMFIG_ROOT = osp.dirname(osp.realpath(__file__))
 
 
 class Status(Enum):
