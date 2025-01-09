@@ -38,6 +38,10 @@ alias python='python3'
 
 alias nvim='venv ~/.venvs/nvim && nvim'
 
+alias rsyncd='rsync -auh --info=progress2'
+
+alias copy='xclip -selection clipboard'
+
 
 POWERLINE_ARROW=$'\uE0B0'
 POWERLINE_BREAK=$'\uE0BC'
