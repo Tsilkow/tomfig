@@ -30,6 +30,8 @@ return {
       vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
       vim.keymap.set('n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
       vim.keymap.set('n', '<leader>f', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
+      vim.keymap.set('n', ')', '<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
+      vim.keymap.set('n', '(', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
       -- vim.keymap.set({'n', 'x'}, '<leader><Tab>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
       vim.keymap.set('n', '<leader> ', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
     end
