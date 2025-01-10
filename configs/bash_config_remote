@@ -22,6 +22,8 @@ alias sudo='sudo '
 
 alias gis='git status'
 
+alias gip='git pull'
+
 alias gid='git diff'
 
 alias giau='git add -u'
@@ -33,6 +35,12 @@ alias tmcp='tmux show-buffer | xclip -selection clipboard'
 alias dps='docker ps'
 
 alias python='python3'
+
+alias nvim='venv ~/.venvs/nvim && nvim'
+
+alias rsyncd='rsync -auh --info=progress2'
+
+alias copy='xclip -selection clipboard'
 
 
 POWERLINE_ARROW=$'\uE0B0'
