@@ -45,7 +45,7 @@ return {
           python = { 'isort', 'black' },
         }
       })
-      vim.keymap.set('n', '<leader>f', function() require('conform').format() end, opts)
+      vim.keymap.set({'n', 'v'}, '<leader>f', function() require('conform').format() end, opts)
     end
   },
   {
