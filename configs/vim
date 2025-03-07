@@ -2,7 +2,7 @@ set nocompatible
 
 " Flags set
 set autoindent " Match indents on new lines.
-set colorcolumn=80,100
+set colorcolumn=88
 set expandtab " use spaces instead of tabs.
 set gdefault " use the `g` flag by default.
 set history=1000
@@ -78,11 +78,13 @@ nnoremap <leader><Tab> ==
 vnoremap <leader><Tab> =gv
 " a is unused
 nnoremap <C-a> ^
-noremap a <Nop>
-noremap A <Nop>
+noremap a viw
+noremap A ggVG
+onoremap a a
 " s is for visual mode (also expand/shrink in treesitter)
 nnoremap s v
 nnoremap S V
+onoremap s i
 " d is for delete operator to empty register
 noremap d "_d
 " C-d is for delete character
@@ -123,8 +125,10 @@ noremap <leader>l $
 noremap ' <Nop>
 " Space-Enter is for newline + enter insert
 nnoremap <leader><CR> o
-" Shift-Enter is for append
-nnoremap <S-CR> a
+" Shift-Enter is for append at the end of the line
+nnoremap <S-CR> A
+" Space-Shift-Enter is for newline + enter insert
+nnoremap <leader><S-CR> O
 
 " z is for undo
 nnoremap z u
@@ -161,6 +165,9 @@ noremap , <Nop>
 " noremap . .
 " noremap / /
 " noremap ? ?
+
+noremap + <C-a>
+noremap - <C-x>
 
 noremap <Up> <Nop>
 noremap <Down> <Nop>

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export EDITOR=vim
+
 function venv () {
     source "$1/bin/activate"
 }
