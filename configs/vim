@@ -172,6 +172,7 @@ noremap + <C-a>
 noremap - <C-x>
 
 noremap <Backspace> "_X
+noremap <Delete> "_x
 
 noremap <Up> <Nop>
 noremap <Down> <Nop>
