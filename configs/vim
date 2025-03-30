@@ -90,9 +90,9 @@ onoremap s i
 " d is for delete operator to empty register
 noremap d "_d
 " C-d is for delete character
-noremap <C-d> "_x
-inoremap <C-d> <C-o>"_x
-" D is for delete word
+" noremap <C-d> "_x
+" inoremap <C-d> <C-o>"_x
+" D is for delete line
 noremap D "_dd
 inoremap <C-D> <C-o>"_X
 " f is for until 
@@ -170,6 +170,8 @@ noremap , <Nop>
 
 noremap + <C-a>
 noremap - <C-x>
+
+noremap <Backspace> "_X
 
 noremap <Up> <Nop>
 noremap <Down> <Nop>

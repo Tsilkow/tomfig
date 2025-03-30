@@ -73,6 +73,7 @@
   (lmet f11) (f11)
   (lmet f12) (f12)
   (lctl d) (bspc)
+  (lctl lsft d) (del)
 )
 
 (deflayer qwerty
