@@ -90,11 +90,12 @@ onoremap s i
 " d is for delete operator to empty register
 noremap d "_d
 " C-d is for delete character
-" noremap <C-d> "_x
-" inoremap <C-d> <C-o>"_x
+noremap <C-d> "_X
+inoremap <C-d> <C-o>"_x
+noremap <C-D> "_X
+inoremap <C-D> <C-o>"_x
 " D is for delete line
 noremap D "_dd
-inoremap <C-D> <C-o>"_X
 " f is for until 
 " noremap f f
 " F is for until in reverse
