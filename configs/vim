@@ -91,9 +91,9 @@ onoremap s i
 noremap d "_d
 " C-d is for delete character
 noremap <C-d> "_X
-inoremap <C-d> <C-o>"_x
-noremap <C-D> "_X
-inoremap <C-D> <C-o>"_x
+inoremap <C-d> <C-o>"_X
+noremap <C-f> "_x
+inoremap <C-f> <C-o>"_x
 " D is for delete line
 noremap D "_dd
 " f is for until 
