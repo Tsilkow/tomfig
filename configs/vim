@@ -77,9 +77,10 @@ vnoremap <S-Tab> <gv
 " Space-Tab is for formatting
 nnoremap <leader><Tab> ==
 vnoremap <leader><Tab> =gv
-" a is unused
+" a is select word
 nnoremap <C-a> ^
 noremap a viw
+" A is select entire file
 noremap A ggVG
 onoremap a a
 " s is for visual mode (also expand/shrink in treesitter)
@@ -105,14 +106,14 @@ inoremap <C-h> <Left>
 noremap <leader>h ^
 inoremap <C-j> <Down>
 cnoremap <C-j> <Down>
-" Space-j is for go to next empty line
-noremap <leader>j }
+" Space-j is for go to next function/class
+noremap <leader>j ]]
 inoremap <C-k> <Up>
 cnoremap <C-k> <Up>
 " J is for go down half a page
 noremap J <C-d>
-" Space-j is for go to previous empty line
-noremap <leader>k {
+" Space-j is for go to previous function/class
+noremap <leader>k [[
 inoremap <C-l> <Right>
 " K is for go up half a page
 noremap K <C-u>
@@ -124,11 +125,11 @@ noremap <leader>l $
 " noremap : :
 " ' is for commenting (comment)
 noremap ' <Nop>
-" Space-Enter is for newline + enter insert
+" Space-Enter is for newline after current line + enter insert
 nnoremap <leader><CR> o
-" Shift-Enter is for append at the end of the line
-nnoremap <S-CR> A
-" Space-Shift-Enter is for newline + enter insert
+" Shift-Enter is for append
+nnoremap <S-CR> a
+" Space-Shift-Enter is for newline before current line + enter insert
 nnoremap <leader><S-CR> O
 
 " z is for undo

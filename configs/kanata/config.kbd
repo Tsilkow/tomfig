@@ -1,4 +1,4 @@
-(defcfg override-release-on-activation yes)
+(defcfg override-release-on-activation no)
 
 (defsrc
   esc     f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
@@ -72,6 +72,7 @@
   (lmet f10) (f10)
   (lmet f11) (f11)
   (lmet f12) (f12)
+  (lctl d) (bspc)
 )
 
 (deflayer qwerty
