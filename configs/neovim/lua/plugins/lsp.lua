@@ -54,7 +54,11 @@ return {
       require('mason-conform').setup()
     end
   },
+  {
+  	"nvim-treesitter/nvim-treesitter-context"
+  },
 }
+
 --         'VonHeikemen/lsp-zero.nvim',
 --   branch = 'v4.x',
 --   config = function()
