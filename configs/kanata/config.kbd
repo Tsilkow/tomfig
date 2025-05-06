@@ -23,33 +23,39 @@
 
 (deffakekeys
   to-base (layer-switch qwerty-base)
+  to-nomods (layer-switch qwerty-nomods)
 )
 
 (deftemplate charmod (char mod)
   (switch 
-    ((key-timing 3 less-than 350)) $char break
-    () (tap-hold-release 200 500  $char $mod) break
+    ((key-timing 3 less-than 250)) $char break
+    () (tap-hold-release 200 500 $char $mod) break
   )
 )
 
-(defalias
-  qwe (layer-switch qwerty-base)
-  pol (one-shot 500 (layer-while-held polish))
-  sym (layer-switch symbols)
+(defchords uio-backspace-delete 50
+  (u    ) u
+  (  i  ) i
+  (    o) o
+  (  i o) bspc
+  (u i  ) del
+)
 
+(defalias
   tap (multi
     (layer-switch qwerty-nomods)
     (on-idle-fakekey to-base tap 20)
   )
 
-  ;;a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
-  ;;s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) ralt $left-hand-keys)
-  ;;d (tap-hold-release-keys $tap-time $hold-time (multi d @tap) lctl $left-hand-keys)
-  ;;f (tap-hold-release-keys $tap-time $hold-time (multi f @tap) lsft $left-hand-keys)
-  ;;j (tap-hold-release-keys $tap-time $hold-time (multi j @tap) rsft $right-hand-keys)
-  ;;k (tap-hold-release-keys $tap-time $hold-time (multi k @tap) rctl $right-hand-keys)
-  ;;l (tap-hold-release-keys $tap-time $hold-time (multi l @tap) ralt $right-hand-keys)
-  ;;; (tap-hold-release-keys $tap-time $hold-time (multi ; @tap) rmet $right-hand-keys)
+  ;;a (tap-hold-release $tap-time $hold-time (multi a @tap) lmet)
+  ;;s (tap-hold-release $tap-time $hold-time (multi s @tap) ralt)
+  ;;d (tap-hold-release $tap-time $hold-time (multi d @tap) lctl)
+  ;;f (tap-hold-release $tap-time $hold-time (multi f @tap) lsft)
+  ;;j (tap-hold-release $tap-time $hold-time (multi j @tap) rsft)
+  ;;k (tap-hold-release $tap-time $hold-time (multi k @tap) rctl)
+  ;;l (tap-hold-release $tap-time $hold-time (multi l @tap) ralt)
+  ;;; (tap-hold-release $tap-time $hold-time (multi ; @tap) rmet)
+  caps (tap-hold 200 200 caps (layer-switch layers))
   a (t! charmod a lmet)
   s (t! charmod s ralt)
   d (t! charmod d lctl)
@@ -58,6 +64,10 @@
   k (t! charmod k rctl)
   l (t! charmod l ralt)
   ; (t! charmod ; rmet)
+  u (chord uio-backspace-delete u)
+  i (chord uio-backspace-delete i) o (chord uio-backspace-delete o)
+  base (layer-switch qwerty-base)
+  nomods (layer-switch qwerty-nomods)
 )
 
 (defoverrides
@@ -103,16 +113,16 @@
 )
 
 (deflayer qwerty-base
-  caps    f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
+ @caps    f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  tab  q    w    e    r    t    y   @u   @i   @o    p    [    ]    \
   esc @a   @s   @d   @f    g    h   @j   @k   @l   @;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lalt lmet lctl           spc            ralt rmet lalt
 )
 
 (deflayer qwerty-nomods
-  caps    f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
+ @caps    f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  a    s    d    f    g    h    j    k    l    ;    '    ret
@@ -120,20 +130,29 @@
   lalt lmet lctl           spc            ralt rmet lalt
 )
 
-(deflayer symbols
-  caps    f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    y    [    ]    p    [    ]    \
-  esc  a    s    d    f    g    h    h   S-,  S-.    ;    '    ret
-  lsft z    x    c    v    b    n    n   S-[  S-]    /    rsft
-  lalt lmet lctl           spc            ralt rmet rctl
+(deflayer layers
+  _ @base @nomods lrld    _     _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _              _              _    _    _
 )
 
-(deflayer polish
-  caps    f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
-  grv   1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab   q    w   @ple  r    t    y    u    i  @plo   p    [    ]    \
-  esc  @pla @pls  d    f    g    h    j    k  @pll   ;    '    ret
-  lsft @plz @plx @plc  v    b   @pln   m    ,    .    /    rsft
-  lalt lmet lctl           spc            ralt rmet rctl
-)
+;; (deflayer symbols
+;;   caps    f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
+;;   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+;;   tab  q    w    e    r    t    y    y    [    ]    p    [    ]    \
+;;   esc  a    s    d    f    g    h    h   S-,  S-.    ;    '    ret
+;;   lsft z    x    c    v    b    n    n   S-[  S-]    /    rsft
+;;   lalt lmet lctl           spc            ralt rmet rctl
+;; )
+;; 
+;; (deflayer polish
+;;   caps    f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
+;;   grv   1    2    3    4    5    6    7    8    9    0    -    =    bspc
+;;   tab   q    w   @ple  r    t    y    u    i  @plo   p    [    ]    \
+;;   esc  @pla @pls  d    f    g    h    j    k  @pll   ;    '    ret
+;;   lsft @plz @plx @plc  v    b   @pln   m    ,    .    /    rsft
+;;   lalt lmet lctl           spc            ralt rmet rctl
+;; )
