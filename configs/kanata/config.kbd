@@ -29,7 +29,7 @@
 (deftemplate charmod (char mod)
   (switch 
     ((key-timing 3 less-than 250)) $char break
-    () (tap-hold-release 200 500 $char $mod) break
+    () (tap-hold-release 150 500 $char $mod) break
   )
 )
 
@@ -37,8 +37,14 @@
   (u    ) u
   (  i  ) i
   (    o) o
-  (  i o) bspc
-  (u i  ) del
+  (u i  ) bspc
+  (  i o) del
+)
+
+(defchords we-tab 50
+  (w  ) w
+  (  e) e
+  (w e) tab
 )
 
 (defalias
@@ -65,7 +71,10 @@
   l (t! charmod l ralt)
   ; (t! charmod ; rmet)
   u (chord uio-backspace-delete u)
-  i (chord uio-backspace-delete i) o (chord uio-backspace-delete o)
+  i (chord uio-backspace-delete i)
+  o (chord uio-backspace-delete o)
+  w (chord we-tab w)
+  e (chord we-tab e)
   base (layer-switch qwerty-base)
   nomods (layer-switch qwerty-nomods)
 )
@@ -115,7 +124,7 @@
 (deflayer qwerty-base
  @caps    f1   f2   f3   f4    f5   f6   f7   f8     f9   f10  f11  f12
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y   @u   @i   @o    p    [    ]    \
+  tab  q   @w   @e    r    t    y   @u   @i   @o    p    [    ]    \
   esc @a   @s   @d   @f    g    h   @j   @k   @l   @;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lalt lmet lctl           spc            ralt rmet lalt
