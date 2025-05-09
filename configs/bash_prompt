@@ -34,7 +34,7 @@ visible_length() {
 }
 
 get_pwd() {
-    pwd | sed "s|^$home|~|"
+    pwd | sed "s|^$HOME|~|"
 }
 
 get_git_branch() {
