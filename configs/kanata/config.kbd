@@ -33,7 +33,7 @@
   )
 )
 
-(defchords uio-backspace-delete 50
+(defchords uio-backspace-delete 40
   (u    ) u
   (  i  ) i
   (    o) o
@@ -41,7 +41,7 @@
   (  i o) del
 )
 
-(defchords we-tab 50
+(defchords we-tab 40
   (w  ) w
   (  e) e
   (w e) tab

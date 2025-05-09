@@ -1,0 +1,115 @@
+#!/bin/bash
+
+ansi_escape() {
+    local IFS=';'
+    local codes="$*"
+    echo -e "\033[${codes}m"
+}
+
+ansi_fg() {
+    local code=$1
+    code=$((code + 30))
+    echo $(ansi_escape $code) 
+}
+
+ansi_bg() {
+    local code=$1
+    code=$((code + 40))
+    echo $(ansi_escape $code) 
+}
+
+ansi_fg_bg() {
+    local fg=$1
+    fg=$((fg + 30))
+    local bg=$2
+    bg=$((bg + 40))
+    echo $(ansi_escape 0 $fg $bg)
+}
+
+visible_length() {
+    local input="$1"
+    local stripped
+    stripped=$(echo -e "$input" | sed -e 's/\x1B\[[0-9;]*[mK]//g')
+    echo -n "${#stripped}"
+}
+
+get_pwd() {
+    pwd | sed "s|^$home|~|"
+}
+
+get_git_branch() {
+    local branch
+    branch=$(git branch --show-current 2>/dev/null)
+    if [[ -n "$branch" ]]; then
+        echo "$branch"
+    fi
+}
+
+set_bash_prompt() {
+    local prompt_ui_color="0" # white
+    local prompt_time_color="2" # green
+    local prompt_user_color="4" # blue
+    local prompt_home_color="3" # yellow
+    local prompt_remote_color="6" # cyan
+    local prompt_git_color="3" # yellow
+    local prompt_venv_color="6" # cyan
+    local prompt_dir_color="1" # red
+    local prompt_is_home=false
+    local homes=("YAOTLEK" "ONE-ESK")
+    for item in "${homes[@]}"; do
+        if [[ $(hostname -s) == "$item" ]]; then
+            prompt_is_home=true
+            break
+        fi
+    done
+
+    local color_reset=$(ansi_escape 0)
+    local powerline_left_arrow=$'\uE0B0'
+    local powerline_right_arrow=$'\uE0B2'
+    local powerline_break=$'\uE0BC'
+    local powerline_break_reverse=$'\uE0BA'
+    local pipe_up_right=$'\u2514'
+    local pipe_right_left=$'\u2500'
+
+    local width=$(tput cols)
+    local git_branch=$(get_git_branch)
+    local left_separator="$(ansi_fg_bg $prompt_ui_color 9)${powerline_break}$(ansi_fg_bg $prompt_ui_color 9)${powerline_break_reverse}$(ansi_bg $prompt_ui_color)"
+
+    local time_segment="$(ansi_fg $prompt_time_color)$(date +%H:%M)"
+    local user_home_segment="$(ansi_fg $prompt_user_color)$(whoami)"
+    if [[ $prompt_is_home = true ]]
+    then
+        user_home_segment="${user_home_segment}$(ansi_fg ${prompt_home_color})@$(hostname -s)"
+    else
+        user_home_segment="${user_home_segment}$(ansi_fg ${prompt_remote_color})@$(hostname -s)"
+    fi
+    local venv_segment=""
+    if [[ -v VIRTUAL_ENV ]]
+    then
+        venv_name=$(basename "$(dirname "$VIRTUAL_ENV")")/$(basename "$VIRTUAL_ENV")
+        venv_segment="$(ansi_fg ${prompt_venv_color})${venv_name}"
+    fi
+    local git_segment=""
+    if [[ ${git_branch} != '' ]]
+    then
+        git_segment="$(ansi_fg ${prompt_git_color}) ${git_branch}"
+    fi
+    local directory_segment="$(ansi_fg ${prompt_dir_color})$(get_pwd)"
+
+    local beginning="$(ansi_bg $prompt_ui_color) ${user_home_segment} "
+    if [[ $venv_segment != '' ]]
+    then
+        beginning="${beginning}${left_separator} ${venv_segment} "
+    fi
+    beginning="${beginning}$(ansi_fg_bg $prompt_ui_color 9)${powerline_left_arrow}"
+    beginning="${beginning} ${directory_segment} "
+    if [[ $git_segment != '' ]]
+    then
+        beginning="${beginning}${git_segment}"
+    fi
+    local end="$(ansi_fg_bg $prompt_ui_color 9)${powerline_right_arrow}$(ansi_bg $prompt_ui_color) ${time_segment} "
+    local padding=$(( width - $(visible_length "$beginning") - $(visible_length "$end") ))
+    PS1="${beginning}$(printf '%*s' $padding '')${end}${color_reset}\n${pipe_up_right}> "
+    PS2="${pipe_right_left}> "
+}
+PROMPT_COMMAND=set_bash_prompt

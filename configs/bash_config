@@ -1,0 +1,38 @@
+#!/bin/bash
+
+export EDITOR=vim
+
+function venv () {
+    source "$1/bin/activate"
+}
+
+function gic () {
+    git commit -m "$1" 
+}
+
+function tma () {
+    tmux a -t "$1"
+}
+
+function dex () {
+    docker exec -ti "$1" bash
+}
+
+alias ll='ls -lAh'
+alias sudo='sudo '
+alias gis='git status'
+alias gip='git pull'
+alias gid='git diff'
+alias giau='git add -u'
+alias tmls='tmux ls'
+alias tmcp='tmux show-buffer | xclip -selection clipboard'
+alias dps='docker ps'
+alias python='python3'
+# alias nvim='venv ~/.venvs/nvim && nvim'
+alias rsyncd='rsync -auh --info=progress2'
+alias copy='xclip -selection clipboard'
+alias pipr='pip install -r requirements.txt'
+
+if [ -f ~/.bash_prompt ]; then
+    . ~/.bash_prompt
+fi
