@@ -17,7 +17,7 @@
 (deftemplate charmod (char mod keys)
   (switch 
     ((key-timing 3 less-than 250)) $char break
-    () (tap-hold-release-keys 200 300 $char $mod $keys) break
+    () (tap-hold-release-keys 0 200 $char $mod $keys) break
   )
 )
 
@@ -35,10 +35,16 @@
   (w e) tab
 )
 
-(defchords ,.-media 40
-  (,  ) ,
-  (  .) .
-  (, .) pp
+(defchords m,./-media 40
+  (m      ) m
+  (  ,    ) ,
+  (    .  ) .
+  (      /) /
+  (m ,    ) prev
+  (  , .  ) pp
+  (    . /) next
+  (m , .  ) voldwn
+  (  , . /) volu
 )
 
 (defchords layer-switching 40
@@ -63,8 +69,10 @@
   o (chord uio-backspace-delete o)
   w (chord we-tab w)
   e (chord we-tab e)
-  , (chord ,.-media ,)
-  . (chord ,.-media .)
+  m (chord m,./-media m)
+  , (chord m,./-media ,)
+  . (chord m,./-media .)
+  / (chord m,./-media /)
   f1 (chord layer-switching f1)
   f2 (chord layer-switching f2)
   f3 (chord layer-switching f3)
@@ -98,10 +106,10 @@
   (ralt ') (lsft `)
   (ralt lsft ') (`)
   (ralt /) (\)
-  (lctl h) (lft)
-  (lctl j) (up)
-  (lctl k) (down)
-  (lctl l) (rght)
+  (lmet h) (lft)
+  (lmet j) (down)
+  (lmet k) (up)
+  (lmet l) (rght)
   ;;(lalt a) (ralt a)
   ;;(lalt c) (ralt c)
   ;;(lalt e) (ralt e)
@@ -141,7 +149,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _    _   
   _    _   @w   @e    _    _    _   @u   @i   @o    _    _    _    _
   esc @a   @s   @d   @f    _    _   @j   @k   @l   @;    _    _  
-  _    _    _    _    _    _    _    _   @,   @.    _    rsft
+  _    _    _    _    _    _    _   @m   @,   @.   @/    rsft
   lalt lmet lctl           spc            ralt rmet lalt
 )
 
