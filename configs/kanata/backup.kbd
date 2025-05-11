@@ -35,6 +35,12 @@
   (w e) tab
 )
 
+(defchords ,.-media 40
+  (,  ) ,
+  (  .) .
+  (, .) pp
+)
+
 (defchords layer-switching 40
   (f1      ) f1
   (   f2   ) f2
@@ -57,6 +63,8 @@
   o (chord uio-backspace-delete o)
   w (chord we-tab w)
   e (chord we-tab e)
+  , (chord ,.-media ,)
+  . (chord ,.-media .)
   f1 (chord layer-switching f1)
   f2 (chord layer-switching f2)
   f3 (chord layer-switching f3)
@@ -133,7 +141,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _    _   
   _    _   @w   @e    _    _    _   @u   @i   @o    _    _    _    _
   esc @a   @s   @d   @f    _    _   @j   @k   @l   @;    _    _  
-  _    _    _    _    _    _    _    _    _    _    _    rsft
+  _    _    _    _    _    _    _    _   @,   @.    _    rsft
   lalt lmet lctl           spc            ralt rmet lalt
 )
 
