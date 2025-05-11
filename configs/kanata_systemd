@@ -6,7 +6,7 @@ Documentation=https://github.com/jtroo/kanata
 Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin
 Environment=DISPLAY=:0
 Type=simple
-ExecStart=/usr/bin/sh -c 'exec ${HOME}/.cargo/bin/kanata --cfg ${HOME}/.config/kanata/config.kbd'
+ExecStart=/usr/bin/sh -c 'exec ${HOME}/.cargo/bin/kanata --cfg ${HOME}/.config/kanata/config.kbd || exec ${HOME}/.cargo/bin/kanata --cfg ${HOME}/.config/kanata/backup.kbd'
 Restart=no
 
 [Install]
