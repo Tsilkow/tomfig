@@ -106,6 +106,7 @@
   (ralt ') (lsft `)
   (ralt lsft ') (`)
   (ralt /) (\)
+  (ralt spc) (spc)
   (lmet h) (lft)
   (lmet j) (down)
   (lmet k) (up)
@@ -145,7 +146,7 @@
 )
 
 (deflayer qwerty-base
-  _   @f1  @f2  @f3   _    _    _    _    _    _    _    _    _  
+  caps @f1 @f2  @f3   _    _    _    _    _    _    _    _    _  
   _    _    _    _    _    _    _    _    _    _    _    _    _    _   
   _    _   @w   @e    _    _    _   @u   @i   @o    _    _    _    _
   esc @a   @s   @d   @f    _    _   @j   @k   @l   @;    _    _  
