@@ -40,11 +40,11 @@
   (  ,    ) ,
   (    .  ) .
   (      /) /
-  (m ,    ) prev
+  (m ,    ) voldwn
   (  , .  ) pp
-  (    . /) next
-  (m , .  ) voldwn
-  (  , . /) volu
+  (    . /) volu
+  (m , .  ) prev
+  (  , . /) next
 )
 
 (defchords layer-switching 40
@@ -54,16 +54,19 @@
   (f1 f2   ) (layer-switch qwerty-base)
   (   f2 f3) (layer-switch qwerty-nomods)
 )
-
 (defalias
-  a (tap-hold-release-keys 0 200 a lmet $lefthand-nomods-keys)
-  s (tap-hold-release-keys 0 200 s ralt $lefthand-nomods-keys)
-  d (tap-hold-release-keys 0 200 d lctl $lefthand-nomods-keys)
-  f (tap-hold-release-keys 0 200 f lsft $lefthand-nomods-keys)
-  j (tap-hold-release-keys 0 200 j rsft $righthand-nomods-keys)
-  k (tap-hold-release-keys 0 200 k rctl $righthand-nomods-keys)
-  l (tap-hold-release-keys 0 200 l ralt $righthand-nomods-keys)
-  ; (tap-hold-release-keys 0 200 ; rmet $righthand-nomods-keys)
+  tap (multi
+    (layer-switch qwerty-nomods)
+    (on-idle-fakekey to-base tap 20)
+  )
+  a (tap-hold-release-keys 0 200 (multi a @tap) lmet $lefthand-nomods-keys)
+  s (tap-hold-release-keys 0 200 (multi s @tap) ralt $lefthand-nomods-keys)
+  d (tap-hold-release-keys 0 200 (multi d @tap) lctl $lefthand-nomods-keys)
+  f (tap-hold-release-keys 0 200 (multi f @tap) lsft $lefthand-nomods-keys)
+  j (tap-hold-release-keys 0 200 (multi j @tap) rsft $righthand-nomods-keys)
+  k (tap-hold-release-keys 0 200 (multi k @tap) rctl $righthand-nomods-keys)
+  l (tap-hold-release-keys 0 200 (multi l @tap) ralt $righthand-nomods-keys)
+  ; (tap-hold-release-keys 0 200 (multi ; @tap) rmet $righthand-nomods-keys)
   u (chord uio-backspace-delete u)
   i (chord uio-backspace-delete i)
   o (chord uio-backspace-delete o)
@@ -94,17 +97,17 @@
   ;;(rsft 0) (rsft .)
   (ralt r) (lsft 8)
   (ralt d) (=)
-  (ralt f) (lsft =)
+  (ralt f) (-)
+  (ralt g) (lsft -)
+  (ralt h) (lsft `)
   (ralt u) (lsft [)
   (ralt i) (lsft ])
   (ralt j) (lsft 9)
   (ralt k) (lsft 0)
+  (ralt ;) (`)
   (ralt m) ([)
   (ralt ,) (])
-  (ralt ;) (-)
-  (ralt lsft ;) (lsft -)
-  (ralt ') (lsft `)
-  (ralt lsft ') (`)
+  (ralt v) (+)
   (ralt /) (\)
   (ralt spc) (spc)
   (lmet h) (lft)
@@ -167,7 +170,7 @@
 ;;  _    _    _    _    _    _    _    _    _    _    _    _    _    _
 ;;  _    _    _    _    _    _    _    _    _    _    _    _    _    _
 ;;  _    π    œ    ę    *    ß    ←    {    }    ó    þ    _    _    _
-;;  _    ą    ś    =    +    ŋ    ’    (    )    ł    -    ~    _
-;;  _    ż    ź    ć    „    ”    ń    [    ]    ≥    \    _
+;;  _    ą    ś    =    -    _    ~    (    )    ł    `    _    _
+;;  _    ż    ź    ć    +    ”    ń    [    ]    ≥    \    _
 ;;  _    _    _              _              _    _    _
 ;;)
