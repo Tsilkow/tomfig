@@ -37,6 +37,7 @@ let mapleader=" "
 
 " q is for recording
 " nnoremap q q 
+nnoremap <leader>q :bdelete #<CR>
 " w is for switching panes
 nnoremap w <C-w><C-w> 
 " e is for edit file
