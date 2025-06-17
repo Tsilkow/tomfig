@@ -99,15 +99,16 @@
   (ralt d) (lsft -)
   (ralt f) (-)
   (ralt g) (=)
-  (ralt h) (lsft `)
+  (ralt v) (+)
   (ralt u) (lsft [)
   (ralt i) (lsft ])
+  (ralt p) (lsft \) 
+  (ralt h) (lsft `)
   (ralt j) (lsft 9)
   (ralt k) (lsft 0)
   (ralt ;) (`)
   (ralt m) ([)
   (ralt ,) (])
-  (ralt v) (+)
   (ralt /) (\)
   (ralt spc) (spc)
   (lmet h) (lft)
@@ -169,7 +170,7 @@
 ;;(deflayer symbols (illustratively)
 ;;  _    _    _    _    _    _    _    _    _    _    _    _    _    _
 ;;  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-;;  _    π    œ    ę    *    ß    ←    {    }    ó    þ    _    _    _
+;;  _    π    œ    ę    *    ß    ←    {    }    ó    |    _    _    _
 ;;  _    ą    ś    =    -    _    ~    (    )    ł    `    _    _
 ;;  _    ż    ź    ć    +    ”    ń    [    ]    ≥    \    _
 ;;  _    _    _              _              _    _    _
