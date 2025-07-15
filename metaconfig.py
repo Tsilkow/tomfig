@@ -10,8 +10,7 @@ configs = {
     'kanata_systemd': osp.join(HOME, '.config/systemd/user/kanata.service'),
     'vim': osp.join(HOME, '.vimrc'),
     'kitty': osp.join(HOME, '.config/kitty'),
-    'bash_config': osp.join(HOME, '.bash_config'),
-    'bash_prompt': osp.join(HOME, '.bash_prompt'),
+    'bash': osp.join(HOME, '.bash'),
     'ideavim': osp.join(HOME, '.ideavimrc'),
     'tmux': osp.join(HOME, '.tmux.conf'),
     'neovim': osp.join(HOME, '.config/nvim'),
@@ -22,7 +21,7 @@ configs = {
 }
 
 config_sets = {
-    'remote': ['bash_config', 'vim', 'tmux'],
-    'home': ['kanata', 'kanata_systemd', 'vim', 'kitty', 'bash_config', 'bash_prompt', 'ideavim', 'tmux', 'neovim'],
+    'remote': ['bash', 'vim', 'tmux'],
+    'home': ['kanata', 'kanata_systemd', 'vim', 'kitty', 'bash', 'ideavim', 'tmux', 'neovim'],
     'tests': ['test1', 'test2']
 }

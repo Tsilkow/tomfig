@@ -1,0 +1,34 @@
+# .bash_config is intended to contain default setup for bash that's shared between 
+# systems.  It is intended to be sourced in .bashrc
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+HISTSIZE=11000
+HISTFILESIZE=22000
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+shopt -s checkwinsize
+
+export EDITOR=vim
+
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+if [ -f ~/.bash/bash_aliases ]; then
+    . ~/.bash/bash_aliases
+fi
+if [ -f ~/.bash/bash_prompt ]; then
+    . ~/.bash/bash_prompt
+fi
