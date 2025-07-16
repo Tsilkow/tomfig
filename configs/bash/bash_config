@@ -1,12 +1,6 @@
 # .bash_config is intended to contain default setup for bash that's shared between 
 # systems.  It is intended to be sourced in .bashrc
 
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
-
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 HISTSIZE=11000
@@ -26,9 +20,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -f ~/.bash/bash_aliases ]; then
-    . ~/.bash/bash_aliases
+current_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "${current_dir}/bash_aliases" ]; then
+    source "${current_dir}/bash_aliases"
 fi
-if [ -f ~/.bash/bash_prompt ]; then
-    . ~/.bash/bash_prompt
+if [ -f "${current_dir}/bash_prompt" ]; then
+    source "${current_dir}/bash_prompt"
 fi

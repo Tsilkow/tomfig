@@ -37,7 +37,10 @@ extract() {
     fi
 }
 
-# Enhanced aliases
+function kssh () {
+    kitten ssh "$1"
+}
+
 alias ls='ls --color=auto'
 alias ll='ls -lah --color=auto'
 alias lt='ls -lahtr --color=auto'  # List by time, reversed
@@ -57,12 +60,8 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias now='date +"%T"'
 alias today='date +"%d-%m-%Y"'
-
-# File search
 alias ff='find . -type f -name'
 alias fd='find . -type d -name'
-
-alias ll='ls -lAh'
 alias sudo='sudo '
 alias gis='git status'
 alias gip='git pull'
